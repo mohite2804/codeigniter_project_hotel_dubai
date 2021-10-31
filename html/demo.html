@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitara</title>
+      <link rel="shortcut icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+   
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <link rel="stylesheet"  href="js/dropdown_datepicker/bootstrap-select.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+   <link rel="stylesheet"  href="css/style.css" />
+</head>
+<body>
+
+
+<div class="pagecontainer">
+ <section class="fixed-top  ">
+  <div class="container-fluid nopadding">
+     <div class="row sidespace">
+      <div class="col-12 col-lg-6  col-xl-6 col-md-12 ">
+          <div id="google_translate_element" style="display:none"></div>
+        
+        
+           <p class="lang_bar text-left">
+              <a href="javascript:void(0);" class="eng_lang" translate="no" onclick="changeLanguageByButtonClick_en()">
+                <input value="en" id="language_en"  /> English</a>
+                <span>|</span>
+                <a href="javascript:void(0);" class="areb_lang" translate="no" onclick="changeLanguageByButtonClick()">
+                <input value="ar" id="language"  /> Arabic</a>
+           </p> 
+      
+
+    
+      </div>
+      <div class="col-12 col-lg-6  col-xl-6 col-md-12 ">
+       <p class="login_bar text-right"> 
+        <a href="login.html">Login</a>
+        <span>|</span>
+        <a href="Register.html">Register</a>
+       </p>
+      </div>
+      
+    </div>
+    <nav class="navbar Navbar_holder navbar-expand-lg navbar-light" data-toggle="sticky-onscroll">
+      <a href="javascript:void(0);" class="Menu_icon" id="toggler_menu">
+        <span class="menu-toggle" >
+          <span class="icon-box-toggle">     
+              <span class="rotate">
+                  <i class="icon-line-top"></i>
+                  <i class="icon-line-center"></i>
+                  <i class="icon-line-bottom"></i> 
+              </span>
+        </span>
+        </span>
+      &nbsp; MENU</a>
+      <a class="navbar-brand" href="Home.html"><img src="images/logo.svg" style="width:140px" class="img-fluid d-block mx-auto"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="mr-auto">  </div>
+        <ul class="navbar-nav">
+          
+          <li class="nav-item"> 
+            <a href="location.html" class="nav-link"><i class="icofont-location-pin"></i> &nbsp;Location</a>
+          </li>
+          <li class="nav-item"> 
+            <a href="" class="nav-link"><i class="icofont-ui-call"></i> &nbsp;+91 8989876789</a>
+          </li>
+          <li class="nav-item"> 
+            <a href="" class="nav-link last-nav-link"><i class="icofont-ui-cell-phone"></i> &nbsp;+91 78767878987</a>
+          </li>
+          
+          
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section> 
+
+<div class="side_menu">
+  <div class="menu_holder">
+    <ul class="menu_link">
+       <li class="active"><a href="Home.html"><span class="MenuIc"><i class="fa fa-home" aria-hidden="true"></i></span> Home</a></li>
+      <li><a href="about.html"><span class="MenuIc"><i class="fa fa-info-circle" aria-hidden="true"></i></span> About</a></li>
+      <li><a href="gallery.html"><span class="MenuIc"><i class="fa fa-camera" aria-hidden="true"></i></span> Gallery</a></li>
+       <li><a href="Rooms.html"><span class="MenuIc"><i class="fa fa-camera" aria-hidden="true"></i></span> Rooms</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+
+<section class="Banner_content">
+  <div class="container-fluid">
+    <div class="row">
+       <div class="col-12 col-lg-12  col-xl-12 col-md-12 nopadding">
+         <div id="bannercarousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner img_inner">
+
+              <div class="carousel-item active">
+               
+                <img class="d-block img-fluid w-100" src="images/slider-1.jpg" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid w-100" src="images/slide-2.jpg" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid w-100" src="images/slide-3.jpg" alt="Third slide">
+              </div>
+              <div class="bannertext">
+                    <div class="new-content container">
+                     <div class="row">
+                      <div class="col-6 col-lg-3 col-xl-3 col-md-6">
+                        <p class="book_label">Room Type</p>
+                       
+
+                          <select class="js-example-basic-single " style="width: 100%">
+                            <option value="AL">Select</option>
+                            <option value="AL">Alabama</option>
+                           
+                            <option value="WY">Wyoming</option>
+                            <option value="WY">Wyoming</option>
+                          </select>
+                      </div>
+                      <div class="col-6 col-lg-2 col-xl-2 col-md-6 checKDate">
+                        <p class="book_label">Check In</p>
+                        <input id="startDate" class="form-control" placeholder="Select Date" />
+                      </div>
+                      <div class="col-6 col-lg-2 col-xl-2 col-md-6 checKDate">
+                        <p class="book_label">Check Out</p>
+                        <input id="endDate" class="form-control" placeholder="Select Date" />
+                      </div>
+                      <div class="col-6 col-lg-2 col-xl-2 col-md-6">
+                        <p class="book_label">Adult</p>
+                        
+                          <select class="js-example-basic-single " style="width: 100%">
+                            <option value="AL">Select</option>
+                            <option value="AL">Alabama</option>
+                           
+                            <option value="WY">Wyoming</option>
+                            <option value="WY">Wyoming</option>
+                          </select>
+                      </div>
+                      <div class="col-6 col-lg-2 col-xl-2 col-md-6">
+                        <p class="book_label">Children</p>
+                       <!--  <input type="text" class="form-control book_input" /> -->
+                          <select class="js-example-basic-single " style="width: 100%">
+                            <option value="AL">Select</option>
+                            <option value="AL">Alabama</option>
+                           
+                            <option value="WY">Wyoming</option>
+                            <option value="WY">Wyoming</option>
+                          </select>
+                      </div>
+                      <div class="col-6 col-lg-1 col-xl-1 col-md-6 book_hotel_content">
+                        
+                        <a href="" class="book_hotel">Book Now</a>
+                      </div>
+                      
+                     </div>
+                  </div>
+                
+                   
+                </div>
+            </div>
+            <a class="carousel-control-prev cust_prev" href="#bannercarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next cust_prev" href="#bannercarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+       </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="info_banner">
+  <div class="container new-content">
+    <div class="row">
+        <div class="col-12 col-lg-12  col-xl-12 col-md-12">
+          <h2 class="Title_text text-center">Hotel Apartments Near<br> Burj Khalifa and The Dubai Mall</h2>
+          <p class="Subtitle_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <h3 class="Title_text">Best known for:</h3>
+          <ul class="info_list">
+            <li><span><i class="icofont-check-circled"></i></span> 5 Star facilities and service</li>
+            <li><span><i class="icofont-check-circled"></i></span> Close to The Dubai Mall, Burj Khalifa and DIFC</li>
+            <li><span><i class="icofont-check-circled"></i></span> Perfect for families and long-staying guests</li>
+            <li><span><i class="icofont-check-circled"></i></span> Restaurant, pool lounge, swimming pool, gym and sauna </li>
+            <li><span><i class="icofont-check-circled"></i></span> 244 fully serviced and furnished hotel apartments</li>
+
+          </ul>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+
+ <section class="slider_content">
+  <div class="container-fluid nopadding">
+    <div class="row nomargin">
+      <div class="col-12 col-lg-12 col-xl-12 col-md-12">
+        <h2 class="Title_text text-center">Room</h2>
+      </div>
+        <div class="col-12 col-lg-12 col-xl-12 col-md-12 top_slide nopadding" dir="ltr" style="direction: ltr;">
+          <div class="bxslider" dir="ltr" style="direction: ltr;">
+          <div class="top_slide_content">
+              <div class="bx_content">
+                <div class="img_box">
+                  <img src="images/img.jpg" class="img-fluid d-block mx-auto">
+                </div>
+                <div class="img_content">
+                  <p>Two Bedroom Apartment</p>
+                  <a href="">Book Now</a>
+                </div>
+              </div>
+              <div class="bx_content">
+                <div class="img_box">
+                  <img src="images/img.jpg" class="img-fluid d-block mx-auto">
+                </div>
+                <div class="img_content">
+                  <p>Two Bedroom Apartment</p>
+                  <a href="">Book Now</a>
+                </div>
+              </div>
+              
+            </div>
+            <div class="top_slide_content">
+              <div class="bx_content">
+                <div class="img_box">
+                  <img src="images/img.jpg" class="img-fluid d-block mx-auto">
+                </div>
+                <div class="img_content">
+                  <p>Two Bedroom Apartment</p>
+                  <a href="">Book Now</a>
+                </div>
+              </div>
+              <div class="bx_content">
+                <div class="img_box">
+                  <img src="images/img.jpg" class="img-fluid d-block mx-auto">
+                </div>
+                <div class="img_content">
+                  <p>One bed apprtment content in two line</p>
+                  <a href="">Book Now</a>
+                </div>
+              </div>
+              
+            </div>
+            <div class="top_slide_content">
+              <div class="bx_content">
+                <div class="img_box">
+                  <img src="images/img.jpg" class="img-fluid d-block mx-auto">
+                </div>
+                <div class="img_content">
+                  <p>Two Bedroom Apartment</p>
+                  <a href="">Book Now</a>
+                </div>
+              </div>
+              <div class="bx_content">
+                <div class="img_box">
+                  <img src="images/img.jpg" class="img-fluid d-block mx-auto">
+                </div>
+                <div class="img_content">
+                  <p>One bed apprtment content in two line</p>
+                  <a href="">Book Now</a>
+                </div>
+              </div>
+              
+            </div>
+            
+            
+          </div>
+
+        </div>
+    </div>
+  </div>
+</section> 
+
+
+
+
+
+<section class="Explore_content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12 col-md-12">
+        <h2 class="Title_text text-center">Explore Our Hotel</h2>
+      </div>
+    </div>
+    <div class="row">
+       
+        <div class="col-lg-6 col-md-12  col-12 Lesspadding">
+            <div class="hovereffect">
+                <img class="img-fluid" src="images/hotel-1.jpg" alt="">
+                <div class="overlay">
+                    <div>
+                       <h2>Dining</h2>
+                       <p class="plus_sign"><i class="icofont-plus-square"></i></p>
+                       <div class="info" >
+                          <p>Taste, experience and indulgence are all on the menu at our à la carte restaurant or at our relaxed pool lounge in Mövenpick Hotel Apartments Downtown
+                          </p>
+                          <a href="" class="">Find out more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12  col-12 Lesspadding">
+            <div class="hovereffect">
+                <img class="img-fluid" src="images/hotel-2.jpg" alt="">
+                <div class="overlay">
+                    <div>
+                       <h2>Dining</h2>
+                        <p class="plus_sign"><i class="icofont-plus-square"></i></p>
+                       <div class="info" >
+                          <p>Taste, experience and indulgence are all on the menu at our à la carte restaurant or at our relaxed pool lounge in Mövenpick Hotel Apartments Downtown
+                          </p>
+                          <a href="" class="">Find out more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="row">
+       
+        <div class="col-lg-4 col-md-12  col-12 Lesspadding">
+            <div class="hovereffect">
+                <img class="img-fluid" src="images/hotel-3.jpg" alt="">
+                <div class="overlay">
+                    <div>
+                       <h2>Dining</h2>
+                        <p class="plus_sign"><i class="icofont-plus-square"></i></p>
+                       <div class="info" >
+                          <p>Taste, experience and indulgence are all on the menu at our à la carte restaurant or at our relaxed pool lounge in Mövenpick Hotel Apartments Downtown
+                          </p>
+                          <a href="" class="">Find out more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12  col-12 Lesspadding">
+            <div class="hovereffect">
+                <img class="img-fluid" src="images/hotel-4.jpg" alt="">
+                <div class="overlay">
+                    <div>
+                       <h2>Dining</h2>
+                        <p class="plus_sign"><i class="icofont-plus-square"></i></p>
+                       <div class="info" >
+                          <p>Taste, experience and indulgence are all on the menu at our à la carte restaurant or at our relaxed pool lounge in Mövenpick Hotel Apartments Downtown
+                          </p>
+                          <a href="" class="">Find out more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="col-lg-4 col-md-12  col-12 Lesspadding">
+            <div class="hovereffect">
+                <img class="img-fluid" src="images/img.jpg" alt="">
+                <div class="overlay">
+                    <div>
+                       <h2>Dining</h2>
+                        <p class="plus_sign"><i class="icofont-plus-square"></i></p>
+                       <div class="info" >
+                          <p>Taste, experience and indulgence are all on the menu at our à la carte restaurant or at our relaxed pool lounge in Mövenpick Hotel Apartments Downtown
+                          </p>
+                          <a href="" class="">Find out more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+  </div>
+</section>
+
+<section class="Good_section">
+  <div class="container new-content">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12 col-md-12">
+        <h2 class="Title_text text-center">Good To Know</h2>
+      </div>
+    </div>
+    <div class="row nomargin">
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-car-alt-1"></i></p>
+          <p class="Good_bx_title">Check in and Check out</p>
+          <p class="Good_bx_sub">Check in from 3:00 pm<br>Check out until 12:00 pm</p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-car-alt-1"></i></p>
+          <p class="Good_bx_title">Complimentary Shuttle</p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-car-alt-1"></i></p>
+          <p class="Good_bx_title">Languages spoken at the hotel</p>
+          <p class="Good_bx_sub">English, Arabic</p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-pay"></i></p>
+          <p class="Good_bx_title">Payment Options</p>
+          <p class="Good_bx_sub"><img src="images/payment.svg" class="img-fluid d-block mx-auto" style="    width: 200px;"></p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-group-students"></i></p>
+          <p class="Good_bx_title">Family</p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-building-alt"></i></p>
+          <p class="Good_bx_title">City</p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-6 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-ui-user-group"></i></p>
+          <p class="Good_bx_title">Meetings</p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-6 col-md-12 Lesspadding_new">
+        <div class="Good_box">
+          <p class="text-center Good_box_ic"><i class="icofont-cart-alt"></i></p>
+          <p class="Good_bx_title">Shopping</p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ <section class="slider_content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12 col-md-12">
+        <h2 class="Title_text text-center">Gallery</h2>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-12 col-xl-12 col-md-12 gal_slide nopadding" dir="ltr" style="direction: ltr;">
+          <div class="gallery_content">
+            <div class="glass_slider">
+                <div class="row">
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img" >
+                      <img src="images/hotel-1.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img" >
+                      <img src="images/hotel-2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/hotel-1.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img" >
+                      <img src="images/hotel-2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img" >
+                      <img src="images/hotel-4.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img" >
+                      <img src="images/hotel-3.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="glass_slider">
+                <div class="row">
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+               
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="glass_slider">
+                <div class="row">
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="glass_slider">
+                <div class="row">
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="glass_slider">
+                <div class="row">
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                </div>
+            </div>
+             <div class="glass_slider">
+                <div class="row">
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="col-6 col-lg-4 col-xl-4 col-md-4 Gal_padding">
+                    <div class="gal_img">
+                      <img src="images/img2.jpg" class="img-fluid">
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section> 
+<section>
+  <div class="container new-content">
+    <div class="row">
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 space_sides">
+        <div class="benifit_box">
+          <p class="text-center Good_box_ic"><i class="icofont-car-alt-1"></i></p>
+          <p class="Good_bx_title">Benefits </p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+          <p><a href="" class="ben_bookNow">Book Now</a></p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 space_sides">
+        <div class="benifit_box">
+          <p class="text-center Good_box_ic"><i class="icofont-leaf"></i></p>
+          <p class="Good_bx_title">Sustainability  </p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+          <p><a href="" class="ben_bookNow">Book Now</a></p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-xl-4 col-md-12 space_sides">
+        <div class="benifit_box">
+          <p class="text-center Good_box_ic"><i class="icofont-email"></i></p>
+          <p class="Good_bx_title">Newsletter  </p>
+          <p class="Good_bx_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+          <p><a href="" class="ben_Signup">Sign up</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+	<section class="footer_bg">
+	<div class="sticky-stopper"></div>
+	<div class="container new-content">
+	<div class="row">
+
+
+	<div class="col-12 col-lg-3 col-xl-3 col-md-12">
+	<img src="images/footer_logo.svg" class="img-fluid" style="width: 200px;">
+	</div>
+
+	<div class="col-12 col-lg-3 col-xl-3 col-md-12">
+	<h3>Menu</h3>
+	<ul class="footer_link">
+	<li><a href="about.html">About us</a></li>
+	<li><a href="gallery.html">Gallery</a></li>
+	<li><a href="Rooms.html">Rooms</a></li>
+	</ul>
+	</div>
+
+	<div class="col-12 col-lg-3 col-xl-3 col-md-12">
+	<h3>Service</h3>
+	<ul class="footer_link">
+	<li><a href="Privacy.html">Privacy Policy</a></li>
+	<li><a href="Terms_condition.html">Terms and Conditions</a></li>
+	<li><a href="location.html">Contact</a></li>
+
+	</ul>
+	</div>
+	<div class="col-12 col-lg-3 col-xl-3 col-md-12">
+	<h3>Follow us</h3>
+	<ul class="footer_link">
+	<li><a href=""><i class="icofont-facebook"></i> Facebook</a></li>
+	<li><a href=""><i class="icofont-twitter"></i> Twitter</a></li>
+	<li><a href=""><i class="icofont-instagram"></i> Instagram</a></li>
+	<li><a href=""><i class="icofont-youtube-play"></i> Youtube</a></li>
+	</ul>
+	</div>
+
+	</div>
+	</div>
+	</section>
+
+
+</div>
+<div class="modal" id="ImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog imageDialog" role="document">
+    <div class="modal-content imgmodal-content">
+      <div class="modal-header modal-head">
+        <h5 class="modal-title" id="exampleModalLabel">1/18</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body zoom_body">
+       <div id="carouselExampleControls" class="carousel slide carousel-fade zoom_control" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block img-fluid mx-auto" src="images/img2.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block img-fluid mx-auto" src="images/img2.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block img-fluid mx-auto" src="images/img2.jpg" alt="First slide">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="feedback_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header noborder modal_spac">
+        <h5 class="modal-title"><img src="images/DPA_LOGO_BLACK.svg" style="width:200px;"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal_spac">
+        <p class="Rate_text">How do you rate this page?</p>
+        <ul class="feedback">
+            <li class="angry">
+                <div>
+                    <svg class="eye left">
+                        <use xlink:href="#eye">
+                    </svg>
+                    <svg class="eye right">
+                        <use xlink:href="#eye">
+                    </svg>
+                    <svg class="mouth">
+                        <use xlink:href="#mouth">
+                    </svg>
+                </div>
+                <span class="tooltiptext">Very Dissatisfied</span>
+            </li>
+            <li class="sad">
+                <div>
+                    <svg class="eye left">
+                        <use xlink:href="#eye">
+                    </svg>
+                    <svg class="eye right">
+                        <use xlink:href="#eye">
+                    </svg>
+                    <svg class="mouth">
+                        <use xlink:href="#mouth">
+                    </svg>
+                </div>
+                <span class="tooltiptext">Dissatisfied</span>
+            </li>
+            <li class="ok">
+                <div></div>
+                <span class="tooltiptext">Neutral</span>
+            </li>
+            <li class="good active">
+                <div>
+                    <svg class="eye left">
+                        <use xlink:href="#eye">
+                    </svg>
+                    <svg class="eye right">
+                        <use xlink:href="#eye">
+                    </svg>
+                    <svg class="mouth">
+                        <use xlink:href="#mouth">
+                    </svg>
+                </div>
+                <span class="tooltiptext">Satisfied</span>
+            </li>
+            <li class="happy">
+                <div>
+                    <svg class="eye left">
+                        <use xlink:href="#eye">
+                    </svg>
+                    <svg class="eye right">
+                        <use xlink:href="#eye">
+                    </svg>
+                </div>
+                <span class="tooltiptext">Very Satisfied</span>
+            </li>
+        </ul>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 4" id="eye">
+              <path d="M1,1 C1.83333333,2.16666667 2.66666667,2.75 3.5,2.75 C4.33333333,2.75 5.16666667,2.16666667 6,1"></path>
+          </symbol>
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 7" id="mouth">
+              <path d="M1,5.5 C3.66666667,2.5 6.33333333,1 9,1 C11.6666667,1 14.3333333,2.5 17,5.5"></path>
+          </symbol>
+         </svg>
+      
+
+      <p class="Rate_text">Please select a subject</p>
+      <select  class=" form-control subject_pick"  >
+        <option>Select</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+        <option>Option 5</option>
+        <option>Option 6</option>
+        <option>Option 7</option>
+        <option>Option 8</option>
+        <option>Option 9</option>
+        <option>Option 11</option>
+        <option>Option 12</option>
+        <option>Option 13</option>
+        <option>Option 14</option>
+
+      </select>
+       <p class="Rate_text">Please, share your comments :</p>
+      <textarea rows="4" cols="4" class="textarea_comment">
+        
+      </textarea>
+      <a href="javascript:void(0);" class="powerdby">Powered by GetFeedback</a>
+      <button type="button" class="submit_feed">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="#top" class="back_top">Back to Top <i class="fa fa-angle-up" aria-hidden="true"></i></a>
+<button type="button" class="feedbackBtn">Feedback</button>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="js/dropdown_datepicker/bootstrap-select.js"></script>
+ <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+ <script type="text/javascript" src="js/main.js"></script> 
