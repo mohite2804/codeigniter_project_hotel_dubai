@@ -4,32 +4,34 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>Admin | Dashboard</title>
+  
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url() . FRONT_CSS_JS; ?>images/logo.svg">
   <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>dist/css/skins/_all-skins.min.css">
-
-
-
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> 
- 
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/iCheck/flat/blue.css">
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/morris/morris.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/datepicker/datepicker3.css">
-    <!-- Daterange picker -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- daterange picker -->
     <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/iCheck/all.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/colorpicker/bootstrap-colorpicker.min.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/select2/select2.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="<?php echo base_url() . ADMIN_CSS_JS; ?>dist/css/skins/_all-skins.min.css">
+
+
+
     <script src="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
 
@@ -53,7 +55,7 @@
       <!-- Logo -->
       <a href="<?php echo base_url(); ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+        <span class="logo-mini"><b>A</b></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b>Admin</b></span>
       </a>
@@ -92,7 +94,7 @@
             </li>
             <!-- Control Sidebar Toggle Button -->
             <li>
-              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              <!-- <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a> -->
             </li>
           </ul>
         </div>

@@ -20,10 +20,10 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			User Album
+			Room Type
 
 		</h1>
-		<a style="float:right; margin-right: 23px;margin-top: -24px;font-size: 20px;" href="<?php echo base_url() . "Admin/usersAlbumManagement"; ?>"> Back</a>
+		<a  style="float:right; margin-right: 23px;margin-top: -24px;font-size: 20px;"  href="<?php echo base_url()."Admin/roomTypes";?>"> Back</a>
 
 	</section>
 

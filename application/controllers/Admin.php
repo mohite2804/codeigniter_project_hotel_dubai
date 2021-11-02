@@ -24,6 +24,40 @@ class Admin extends CI_Controller {
 		redirect(base_url().'admin');
 	}
 
+	public function getOrders(){
+		$where = " o.id != 0 ";
+		
+
+
+	
+		if(!empty($this->input->post('submit'))){
+
+			//echo "<pre>"; print_r($this->input->post()); exit;
+			$payment_status = $this->input->post('payment_status');
+			if($payment_status){
+				$where .= " and o.status = '$payment_status' ";
+			}
+
+			$start_date_time = "2021-10-31";
+			$end_date_time = "2021-10-31";
+			
+			if($start_date_time && $end_date_time){
+				$where .= " and o.start_date_time >= $start_date_time and o.end_date_time <= $end_date_time ";
+			}
+
+			
+		}else{
+			$start_date_time = "2021-10-31";
+			$end_date_time = "2021-10-31";
+			$where .= " and start_date_time >= $start_date_time and end_date_time <= $end_date_time ";
+
+		}
+
+		$data['result'] = $this->Main_Model->getOrders();
+		
+		$data['main_contain'] = 'admin/orders/index';
+		$this->load->view('admin/includes/template',$data);
+	}
 
 	public function roomTypes(){
 		$data['result'] = $this->Main_Model->getRoomTypes();
@@ -75,29 +109,34 @@ class Admin extends CI_Controller {
 	
 	function editRoomType(){
 		if(!empty($this->input->post('submit'))){
+
+			$room_type_id = $this->input->post('room_type_id');
+			if($this->input->post('name')){
+				$this->db->set('name', $this->input->post('name'));
+				$this->db->where('id',  $room_type_id);
+				$this->db->update('room_types'); 
+
+			}
+
 			if(!empty($_FILES['image'])){
 				$upload_path = FRONT_CSS_JS."images/";
 				$image_title = "room_type";
 				$image_file = "image";
 				$newimagenames = $this->database_library->multipleImageUpload($upload_path,$image_file,$image_title);		
-				
-			}
 
-			$room_type_id = $this->input->post('room_type_id');
-			if(!empty($newimagenames)){
-				$values = "";	$user_id = 1; 
-				foreach( $newimagenames as $row ){
-					$values .= "($room_type_id,'rooms', '".'images/'.$row."','".date('Y-m-d H:i:s')."'),"; 
+				if(!empty($newimagenames)){
+					$values = "";	$user_id = 1; 
+					foreach( $newimagenames as $row ){
+						$values .= "($room_type_id,'rooms', '".'images/'.$row."','".date('Y-m-d H:i:s')."'),"; 
+					}
+	
+					$sql = "INSERT INTO `slider_images` (room_type_id,title, image,created_at) VALUES $values";
+					$sql = substr($sql,0,-1);	
+				
+					$this->Main_Model->addUserAlbum($sql);
 				}
-
-				$sql = "INSERT INTO `slider_images` (room_type_id,title, image,created_at) VALUES $values";
-				$sql = substr($sql,0,-1);	
-			
-				$this->Main_Model->addUserAlbum($sql);
-			}
-		
-			
 				
+			}
 				
 		}
 		$id = $this->uri->segment('3');

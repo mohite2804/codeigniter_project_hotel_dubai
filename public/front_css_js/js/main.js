@@ -2,6 +2,8 @@ $(document).ready(function() {
 
 
 
+
+
     $('.suc_msg_hide').delay(5000).fadeOut('slow');
 
     $('#ad_minus').click(function() {
@@ -180,16 +182,10 @@ $('.back_top').fadeOut();
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({ pageLanguage: "en,ar" }, 'google_translate_element');
 }
-$('.areb_lang').css('color', '#ccc')
-
-setTimeout(function() {
-    $('.goog-te-banner-frame').hide();
-    $('.goog-te-banner-frame').css('height', '0px');
-    $('body').css('top', '0px');
-}, 1000);
-
 
 function changeLanguageByButtonClick() {
+    sessionStorage.setItem("selected_language", "Arabic");
+
     $('.eng_lang').css('color', '#888888');
     $('.areb_lang').css('color', '#373736');
     $('.side_menu').addClass('side_ar');
@@ -222,6 +218,7 @@ function changeLanguageByButtonClick() {
 
 
 function changeLanguageByButtonClick_en() {
+    sessionStorage.setItem("selected_language", "English");
     $('.areb_lang').css('color', '#888888');
     $('.eng_lang').css('color', '#373736');
     $('.side_menu').removeClass('side_ar');
@@ -252,6 +249,18 @@ function changeLanguageByButtonClick_en() {
     $('.login_bar ').addClass('text-right');
     $('.Menu_icon').css({ 'border-right': '1px solid #C7C5C5', 'padding-right': '20px', 'border-left': '0px' });
 }
+
+
+$('.areb_lang').css('color', '#ccc')
+
+setTimeout(function() {
+    $('.goog-te-banner-frame').hide();
+    $('.goog-te-banner-frame').css('height', '0px');
+    $('body').css('top', '0px');
+}, 1000);
+
+
+
 
 setTimeout(function() {
     $('.goog-te-banner-frame').hide();

@@ -20,48 +20,29 @@
 
           <ul class="sidebar-menu">
 
-            <li class="treeview">
+            <li class="<?php echo ($this->uri->segment(2) == 'roomTypes') ? 'active' : '' ?>">
               <a href="<?php echo base_url() . 'Admin/roomTypes'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Room Type</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Room Type</span> </i>
               </a>
             </li>
+
+            <li class="<?php echo ($this->uri->segment(2) == 'gallery') ? 'active' : '' ?>">
+              <a href="<?php echo base_url() . 'Admin/gallery'; ?>">
+                <i class="fa fa-dashboard"></i> <span>Gallery</span> </i>
+              </a>
+            </li>
+
 
             <li class="treeview">
-              <a href="<?php echo base_url() . 'Admin/gallery'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Gallery</span> <i class="fa fa-angle-left pull-right"></i>
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li class="active">
+                    <a href="<?php echo base_url() . 'Admin/getOrders'; ?>"><i class="fa fa-circle-o"></i>Orders</a></li>
+                
+              </ul>
             </li>
-
-
-            <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
-          </li>
 
           
             <!-- <li class="active treeview">

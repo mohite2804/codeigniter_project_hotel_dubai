@@ -98,7 +98,11 @@ class Home extends CI_Controller {
 	}
 
 	public function dashboard(){
-		$data['result']  = $this->Home_Model->getProducts();
+
+				
+		
+
+		$data['result']  = $this->Home_Model->getDashboard();
 		$data['main_contain'] = 'front/dashboard_page/index';		
 		$this->load->view('front/includes/template',$data);
 	}
@@ -161,7 +165,7 @@ class Home extends CI_Controller {
 		$this->load->view('front/includes/template',$data);
 	}
 
-	public function products($id){
+	public function products(){
 		$data['result']  = $this->Home_Model->getProducts();
 		$data['selected_data']['room_type']  = '';
 		$data['selected_data']['room_start_date']  = '';
@@ -202,22 +206,10 @@ class Home extends CI_Controller {
 
 		}
 		
-		if($id){
-
-			$where = array(	'r.room_type_id' => $room_type);
-			$data['room_wise_services'] =  $this->Home_Model->getRoomWiseServices($where);	
-
-			echo "<pre>"; print_r($data['room_wise_services']); exit;
-			$data['selected_data']['room_type']  = $room_type;
-			$data['selected_data']['room_start_date']  = $room_start_date;
-			$data['selected_data']['room_end_date']  = $room_end_date;
-			$data['selected_data']['room_no_of_adult']  = $room_no_of_adult;
-			$data['selected_data']['room_no_of_children']  = $room_no_of_children;				
-
-			
-
-		}
+	
 		$data['room_types'] =  $this->db->where('is_active','1')->get('room_types')->result();	
+
+		//echo "<pre>"; print_r($data); exit;
 		$data['main_contain'] = 'front/products_page/index';		
 		$this->load->view('front/includes/template',$data);
 	}

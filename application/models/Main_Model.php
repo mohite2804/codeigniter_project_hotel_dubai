@@ -6,6 +6,22 @@ class Main_Model extends CI_Model {
                 parent::__construct();
         }
 		
+
+	function getOrders($where = ""){
+		$sql = "select o.*,u.user_fullname,u.user_email,u.user_mobile_no_1,u.user_mobile_no_2,rt.name as room_type
+		from orders o 
+		join users u on u.user_id = o.user_id
+		join rooms r on r.id = o.room_id
+		join room_types rt on rt.id = r.room_type_id";
+
+		if($where){
+			$sql .= " where $where";
+		}
+		
+		
+		 $this->db->query($sql);
+	}
+
 	function getRoomTypes(){
 		return $this->db->from('room_types')->get()->result();
 	}

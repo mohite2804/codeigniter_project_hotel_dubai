@@ -34,4 +34,41 @@ $(function() {
             form.submit();
         }
     });
+
+    $("#dashboard_form").validate({
+
+
+        rules: {
+
+            room_type: {
+                required: true,
+            },
+            room_start_date: {
+                required: true
+            },
+            room_end_date: {
+                required: true
+            },
+            room_no_of_adult: {
+                required: true
+            },
+            room_no_of_children: {
+                required: true
+            }
+
+
+        },
+
+        messages: {
+            room_type: "Please Select Room Type",
+            room_start_date: "Please Select Date",
+            room_end_date: "Please Select Date",
+            room_no_of_adult: "Please Select Number of Adult",
+            room_no_of_children: "Please Select Number of Children",
+
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
 });

@@ -39,7 +39,46 @@ class Home_Model extends CI_Model {
 		if( count($where) > 0 ){
 			$this->db->where($where);
 		}
-		return $result = $this->db->get('rooms as r')->result();
+		
+
+		return $result =  $this->db->select('r.*,s.image as room_image,rt.name as heading')
+		->from('rooms as r')
+		->join('room_types as rt','rt.id = r.room_type_id')
+		->join('slider_images as s','s.room_type_id = rt.id')
+		->where('r.is_active', 1)
+		->group_by('r.id')
+		->order_by('r.id')
+		->get()->result();
+	}
+
+	function getDashboard(){
+
+		$user_id = $this->session->userdata('user_session')['logged_in'];
+		
+		if($user_id){
+			$this->db->where('o.user_id', $user_id );
+			$result =  $this->db->select('o.*,s.image as room_image,rt.name as heading')
+			->from('orders as o')
+			->join('rooms as r','r.id = o.room_id')
+			->join('room_types as rt','rt.id = r.room_type_id')
+			->join('slider_images as s','s.room_type_id = rt.id')
+			->where('r.is_active', 1)
+			->group_by('r.id')
+			->order_by('r.id')
+			->get()->result();
+
+			if($result){
+				foreach($result as $row){
+					$row->services = $this->getServicesByRoomId($row->id);
+				}
+			}
+
+		}
+
+		
+
+		return $result;
+
 	}
 
 	function feedback($insert_data){

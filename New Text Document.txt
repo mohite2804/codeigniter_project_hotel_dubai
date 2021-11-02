@@ -2,3 +2,64 @@ https://codingbirdsonline.com/razorpay-payment-gateway-setup-in-codeigniter/
 
 withdrawAmountFromWallet
 http://localhost:4200/my-account/withdraw-amount
+
+https://github.com/codeforcrack-kalai/CCAvenue-Payment-Gateway-integration-for-Codeigniter
+
+https://www.tutorialswebsite.com/google-translate-api-with-php-javascript/
+
+
+
+Product Page 3 days
+Dashboard Page 3 days
+Payment Gateway 5 day
+SMS Gateway 3 day 
+Admin Room Report 4 day
+
+
+getProducts
+
+
+$where = array(
+					'r.room_type_id' => $room_type,
+					'r.no_of_adults >=' => $room_no_of_adult,
+					'r.no_of_children >=' => $room_no_of_children
+
+				);		
+				
+				$data['room_wise_services'] =  $this->Home_Model->getRoomWiseServices($where);				
+				$data['result']  = $this->Home_Model->getProducts($where);
+
+				$where = array(
+					'r.room_type_id' => $room_type,
+					'r.no_of_adults >=' => $room_no_of_adult,
+					'r.no_of_children >=' => $room_no_of_children
+
+				);		
+				
+				$data['room_wise_services'] =  $this->Home_Model->getRoomWiseServices($where);				
+				$data['result']  = $this->Home_Model->getProducts($where);
+
+				if($result){
+			foreach($result as $row){
+				$row->services = $this->getServicesByRoomId($row->id);
+			}
+		}
+
+		logged_in
+
+		$this->session->userdata('user_session')
+
+		['user_fullname']
+
+		editRoomType
+
+		$this->db->set($this->input->post());
+		$this->db->where('user_id', $this->session->userdata('admin_session')['logged_in']);
+		$this->db->update('users'); 
+		if($this->db->affected_rows())
+			return true;
+		else
+			return false;
+
+			codeigniter_project_hotel_dubai
+			codeigniter_project_hotel_dubai

@@ -11,7 +11,7 @@
                 <div class="bannertext myGroup">
 
                     <div class="new-content container">
-                        <?php echo form_open(base_url('products'), array('id' => 'front_login')); ?>
+                        <?php echo form_open(base_url('products'), array('id' => 'dashboard_form')); ?>
                         <div class="row">
                             <div class="col-6 col-lg-3 col-xl-3 col-md-6">
                                 <p class="book_label">Room Type</p>
@@ -26,11 +26,11 @@
                             </div>
                             <div class="col-6 col-lg-2 col-xl-2 col-md-6 checKDate">
                                 <p class="book_label">Check In</p>
-                                <input autocomplete="off" name="room_start_date" id="startDate" class="form-control" placeholder="Select Date" />
+                                <input autocomplete="off" name="room_start_date" id="startDate" class="form-control" placeholder="Check In" />
                             </div>
                             <div class="col-6 col-lg-2 col-xl-2 col-md-6 checKDate">
                                 <p class="book_label">Check Out</p>
-                                <input autocomplete="off" name="room_end_date" id="endDate" class="form-control" placeholder="Select Date" />
+                                <input autocomplete="off" name="room_end_date" id="endDate" class="form-control" placeholder="Check Out" />
                             </div>
                             <div class="col-6 col-lg-2 col-xl-2 col-md-6">
                                 <div class="relativepos">
