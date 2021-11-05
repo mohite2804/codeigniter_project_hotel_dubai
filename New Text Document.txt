@@ -1,3 +1,25 @@
+-----------------Cpnel Details -----------------
+Domain: sitarahotelapartment.com
+| UserName: httpsitarahotela
+| PassWord: WO5sCk}Ip?+m
+
+
+-------------Database User name password-------------
+database : httpsitarahotela_hotel
+user name : httpsitarahotela_hotel
+password : pn]9qW,@0Zua
+
+
+---------FTP User name Password-------------
+
+FTP Username: hotel@sitarahotelapartment.com
+FTP server: ftp.sitarahotelapartment.com
+FTP & explicit FTPS port:  21
+Password : W~c$F&.Ey;5B
+
+
+
+
 https://codingbirdsonline.com/razorpay-payment-gateway-setup-in-codeigniter/
 
 withdrawAmountFromWallet

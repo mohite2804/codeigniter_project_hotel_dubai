@@ -5,6 +5,7 @@ class Home_Model extends CI_Model {
         {
                 parent::__construct();
 				$this->load->library('session');
+				$this->load->library('database_library');
         }
 		
 	function FrontsubmitRegister($post_data){
@@ -12,6 +13,21 @@ class Home_Model extends CI_Model {
 			return $this->db->insert_id();
 		else	
 			return false;
+	}
+
+	function forgotPassword($email){
+
+		
+		$from = "sitara@gmail.com";
+		$to = $email;
+		$sub = "Forgot Password";
+		$msg = "password";
+		$comp_name = "Sitara";
+
+		$this->load->library('database_library');
+		return $this->database_library->sendEmail($from,$to,$sub,$msg,$comp_name);
+
+
 	}
 
 	function getRoomImagesWithRoomType($room_types){

@@ -16,7 +16,7 @@
         <div class="loginBox">
           <h4>Login</h4>
           <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg'); ?></h3>
-
+          <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_register');?></h3>
           <p class="Sign_text">Doesn't have an account? <a href="<?php echo base_url() . 'register'; ?>">Sign up</a></p>
 
           <?php echo form_open(base_url('Home/login'), array('id' => 'front_login')); ?>

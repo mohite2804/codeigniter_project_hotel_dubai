@@ -15,12 +15,15 @@ $(function() {
             user_confirm_password: {
                 required: true,
                 minlength: 5
-            }
+            },
+            user_checkbox : "required"
+
+            
         },
 
         messages: {
             user_fullname: "Please enter Full Name",
-            password: {
+            user_password: {
                 required: "Please enter Password",
                 minlength: "Your password must be at least 5 characters long"
             },
@@ -28,7 +31,8 @@ $(function() {
                 required: "Please enter Password",
                 minlength: "Your password must be at least 5 characters long"
             },
-            email: "Please enter a valid email address"
+            user_email: "Please enter a valid email address",
+            user_checkbox: "Please check terms and Condtions"
         },
         submitHandler: function(form) {
             form.submit();
@@ -71,4 +75,68 @@ $(function() {
             form.submit();
         }
     });
+
+    $("#front_forgotPassword").validate({
+
+        rules: {
+            user_email: {
+                required: true,
+                email: true
+            }
+
+        },
+        messages: {
+            user_email: "Please enter a valid email address"
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    $("#front_register").validate({
+
+        rules: {
+            user_fullname: "required",
+            user_email: {
+                required: true,
+                email: true
+            },
+            user_password: {
+                required: true,
+                minlength: 5
+            },
+            user_confirm_password: {
+                required: true,
+                minlength: 5
+            },
+            user_checkbox : "required"
+
+            
+        },
+
+        messages: {
+            user_fullname: "Please enter Full Name",
+            user_password: {
+                required: "Please enter Password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            user_confirm_password: {
+                required: "Please enter Password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            user_email: "Please enter a valid email address",
+            user_checkbox: "Please check terms and Condtions"
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+    
+
+    
 });
+
+
+function registrationFormReset(){
+    $('#front_register')[0].reset();
+}

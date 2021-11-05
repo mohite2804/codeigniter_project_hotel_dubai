@@ -15,10 +15,10 @@
       <div class="col-12 col-lg-6 col-xl-6 col-md-12 d_flex">
         <div class="loginBox">
           <h4>Sign up</h4>
-          <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg');?></h3>
+          <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_register');?></h3>
           <p class="Sign_text">Already have an account? <a href="<?php echo base_url() . 'login'; ?>">Login</a></p>
        
-          <?php echo form_open(base_url( 'Home/register' ), array( 'id' => 'front_login' ));?>
+          <?php echo form_open(base_url( 'register' ), array( 'id' => 'front_register' ));?>
             <div class="form-group">
               <p class="Login_label">Full Name</p>
               <input name="user_fullname" value="<?php echo set_value('user_fullname') ?>" type="text" class="form-control login_input" placeholder="Enter Name">
@@ -26,28 +26,32 @@
             </div>
             <div class="form-group">
               <p class="Login_label">Email Address</p>
-              <div class="error"><input name="user_email" value="<?php echo set_value('user_email') ?>" type="email" class="form-control login_input" placeholder="Enter Email">
+              <div autocomplete="off" class="error"><input name="user_email" value="<?php echo set_value('user_email') ?>" type="email" class="form-control login_input" placeholder="Enter Email">
               <?php echo form_error('user_email'); ?></div>  
             </div>
             <div class="form-group">
               <p class="Login_label">Password</p>
-              <input name="user_password" value="<?php echo set_value('user_password') ?>" type="password" class="form-control login_input" placeholder="Enter Password">
+              <input autocomplete="off" name="user_password" value="<?php echo set_value('user_password') ?>" type="password" class="form-control login_input" placeholder="Enter Password">
               <div class="error"><?php echo form_error('user_password'); ?></div>  
             </div>
             <div class="form-group">
               <p class="Login_label">Confirm Password</p>
-              <input name="user_confirm_password" value=<?php echo set_value('user_confirm_password') ?>"" type="password" class="form-control login_input" placeholder="Enter Confirm  Password">
+              <input autocomplete="off" name="user_confirm_password" value=<?php echo set_value('user_confirm_password') ?>"" type="password" class="form-control login_input" placeholder="Enter Confirm  Password">
               <div class="error"><?php echo form_error('user_confirm_password'); ?></div>  
             </div>
             <div class="form-group">
-              <p><label class="check_content"> A agree the <a href="<?php echo base_url() . 'privacy-policy'; ?>">privacy policy</a> & <a href="<?php echo base_url() . 'terms-and-conditions'; ?>">booking terms and condition</a>.
-                  <input name="user_checkbox" type="checkbox" >
+                <input name="user_checkbox" type="checkbox" >
                   <span class="Ch_checkmark"></span>
-                </label></p>
+       
+
+              <label class="check_content"> A agree the <a href="<?php echo base_url() . 'privacy-policy'; ?>">privacy policy</a> & <a href="<?php echo base_url() . 'terms-and-conditions'; ?>">booking terms and condition</a>.</label>
+               
+                
+                
               <div class="error"><?php echo form_error('user_checkbox'); ?></div>  
             </div>
 
-            <input type="submit" name="submit" value="Register" class="loginbtn" \>
+            <input type="submit" name="submit" value="Register" class="loginbtn"   onclick="registrationFormReset()" \>
             
 
             <?php echo form_close();?>

@@ -11,20 +11,23 @@
         </div>
        </div>
        <div class="col-12 col-lg-6 col-xl-6 col-md-12 d_flex">
+       <?php echo form_open(base_url('Home/forgotPassword'), array('id' => 'front_forgotPassword')); ?>
+
         <div class="loginBox">
           <h4>Reset Password</h4>
           <p class="Sign_text">Enter your email address and we will email you instruction on how to reset password</p>
           <div class="form-group">
             <p class="Login_label">Email Address</p>
-            <input type="email" class="form-control login_input" placeholder="Enter Email">
+            <input name="user_email" type="email" class="form-control login_input" placeholder="Enter Email">
           </div>
          
          
-         
-            <a href="Reset.html" class="loginbtn">Send me instruction</a>
+          <input type="submit" name="submit" value="Send me instruction" class="loginbtn" \>
+          
          
 
         </div>
+        <?php echo form_close(); ?>
        </div>
     </div>
   </div>

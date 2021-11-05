@@ -242,6 +242,21 @@ class Home extends CI_Controller {
 	
 
 	public function forgotPassword(){
+
+		if(!empty($this->input->post('submit'))){
+			$this->form_validation->set_rules('user_email', 'Email', 'required|valid_email');
+
+			if (!$this->form_validation->run() == FALSE){
+				$email = $this->input->post('user_email');
+				$last_id = $this->Home_Model->forgotPassword($email);
+				if($last_id){
+					$this->session->set_flashdata('suc_msg_forgot', "<span style='color:green' >Password send to your .</span>");
+				}else{
+					$this->session->set_flashdata('suc_msg_forgot', "<span style='color:red' >Sorry please try again after some time.</span>");
+				}
+
+			}
+		}
 		$data['main_contain'] = 'front/forgot_password_page/index';		
 		$this->load->view('front/includes/template',$data);
 	}
@@ -255,8 +270,8 @@ class Home extends CI_Controller {
 			$this->form_validation->set_rules('user_fullname', 'Full Name', 'required');
 			$this->form_validation->set_rules('user_email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('user_password', 'Password', 'required');
-			$this->form_validation->set_rules('user_confirm_password', 'Password', 'required');
-			$this->form_validation->set_rules('user_checkbox', 'Term and Condition', 'required');
+			$this->form_validation->set_rules('user_confirm_password', 'Confirm Password', 'required');
+			$this->form_validation->set_rules('user_checkbox', 'Terms and Conditions', 'required');
 			
 		
 			if (!$this->form_validation->run() == FALSE){
@@ -269,14 +284,13 @@ class Home extends CI_Controller {
 					//echo "<pre>"; print_r($inser_data); exit;
 					$last_id = $this->Home_Model->FrontsubmitRegister($inser_data);
 					if($last_id){
-						$this->session->set_flashdata('suc_msg', "<span style='color:green' >Congratulations, your account has been successfully created.</span>");
+						redirect(base_url().'login');
+						$this->session->set_flashdata('suc_msg_register', "<span style='color:green' >Congratulations, your account has been successfully created.</span>");
 					}else{
-						$this->session->set_flashdata('suc_msg', "<span style='color:red' >Sorry please try again after some time.</span>");
+						$this->session->set_flashdata('suc_msg_register', "<span style='color:red' >Sorry please try again after some time.</span>");
 					}
 					
 				
-			}else{
-			
 			}
 		}
 		$data['main_contain'] = 'front/register_page/index';		
