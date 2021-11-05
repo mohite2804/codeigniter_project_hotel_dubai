@@ -125,7 +125,7 @@
 
         <p class="Rate_text">Please select a subject</p>
         <select name="feedback_subject" class=" form-control subject_pick">
-          <option>Select</option>
+          <option value="" >Select Subject</option>
           <option>Option 2</option>
           <option>Option 3</option>
           <option>Option 4</option>
@@ -143,9 +143,9 @@
         <div class="error"><?php echo form_error('feedback_subject'); ?></div>  
         <p class="Rate_text">Please, share your comments :</p>
         <textarea name="feedback_comment"  rows="4" cols="4" class="textarea_comment"></textarea>
-        <input name="feedback_current_url" type="text" value="<?php echo current_url(); ?>" >
+        <input name="feedback_current_url" type="hidden" value="<?php echo current_url(); ?>" >
       <div class="error"><?php echo form_error('feedback_comment'); ?></div>  
-        <a href="javascript:void(0);" class="powerdby">Powered by GetFeedback</a>
+        <!-- <a href="javascript:void(0);" class="powerdby">Powered by GetFeedback</a> -->
        
         <input name="submit" type="submit" class="submit_feed" value="Submit" >
       </div>

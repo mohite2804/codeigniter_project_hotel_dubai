@@ -132,7 +132,23 @@ $(function() {
         }
     });
     
+    
 
+    $("#front_feedback").validate({
+
+        rules: {
+            feedback_subject: "required",            
+            feedback_comment : "required"            
+        },
+
+        messages: {
+            feedback_subject: "Please enter subject",            
+            feedback_comment: "Please enter commect"
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
     
 });
 
