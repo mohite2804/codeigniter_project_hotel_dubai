@@ -7,7 +7,7 @@ $('#ad_minus').click(function () {
 
 
     var count = parseInt($input.val()) - 1;
-    count = count < 1 ? 1 : count;
+    count = count < 0 ? 1 : count;
     $input.val(count);
     $input.change();
     $adultcount.text(count);
@@ -37,7 +37,7 @@ $('#ch_minus').click(function () {
 
 
     var count = parseInt($input.val()) - 1;
-    count = count < 1 ? 1 : count;
+    count = count < 0 ? 1 : count;
     $input.val(count);
     $input.change();
    
@@ -46,6 +46,36 @@ $('#ch_minus').click(function () {
     return false;
 });
 $('#ch_plus').click(function () {
+    console.log('addcount');
+    var $input = $(this).parent().find('input');
+    
+     var $chldcount = $('#chld_count');
+    $input.val(parseInt($input.val()) + 1);
+    $input.change();
+   
+
+    $chldcount.text(parseInt($input.val()));
+    $chldcount.change();
+    return false;
+});
+
+$('#Rm_minus').click(function () {
+    console.log('minusCount');
+    var $input = $(this).parent().find('input');
+   
+    var $chldcount = $('#chld_count');
+
+
+    var count = parseInt($input.val()) - 1;
+    count = count < 0 ? 1 : count;
+    $input.val(count);
+    $input.change();
+   
+    $chldcount.text(count);
+    $chldcount.change();
+    return false;
+});
+$('#Rm_plus').click(function () {
     console.log('addcount');
     var $input = $(this).parent().find('input');
     

@@ -60,4 +60,39 @@
 </section>
 
 
-<?php $this->load->view('front/newsletter_page/index'); ?>
+
+<div class="modal" id="ImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog imageDialog" role="document">
+        <div class="modal-content imgmodal-content">
+            <div class="modal-header modal-head">
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body zoom_body">
+                <div id="carouselExampleControls" class="carousel slide carousel-fade zoom_control" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php if (count($result) > 0) { ?>
+                            <?php foreach ($result as $key => $row) { ?>
+                                <div class="carousel-item">
+                                    <img class="d-block img-fluid mx-auto" src="<?php echo base_url() . FRONT_CSS_JS; ?><?php echo $row->image; ?>" alt="<?php echo base_url() . FRONT_CSS_JS; ?><?php echo $row->image; ?>">
+                                </div>
+
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -68,16 +68,22 @@ $route['register'] = 'Home/register';
 $route['forgot-password'] = 'Home/forgotPassword';
 
 $route['dashboard'] = 'Home/dashboard';
+
+
+$route['buynow'] = 'Home/buyNow';
+
 $route['products'] = 'Home/products';
-
-
-
 $route['product/(:any)'] = 'Home/product/$1';
 
 
 $route['logout'] = 'Home/logout';
 
 $route['feedback'] = 'Home/feedback';
+$route['sendOTP'] = 'Home/sendOTP';
+$route['varifyEmail/(:any)'] = 'Home/varifyEmail/$1';
+$route['resetPassword/(:any)'] = 'Home/resetPassword/$1';
+$route['resetPasswordSubmit'] = 'Home/resetPasswordSubmit';
+$route['getPaymentGatewayResponse'] = 'Home/getPaymentGatewayResponse';
 
 
 

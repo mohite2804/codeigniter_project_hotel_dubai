@@ -7,28 +7,166 @@ class Home_Model extends CI_Model {
 				$this->load->library('session');
 				$this->load->library('database_library');
         }
+
+
+	function getPaymentGatewayResponse($payment_gateway_response){
+		$insert_into_payment = array();
+		if(!empty($payment_gateway_response)){
+			$insert_into_payment['order_id'] = $payment_gateway_response['order_id'];
+			$insert_into_payment['tracking_id'] = $payment_gateway_response['tracking_id'];
+			$insert_into_payment['bank_ref_no'] = $payment_gateway_response['bank_ref_no'];
+			$insert_into_payment['order_status'] = $payment_gateway_response['order_status'];
+			$insert_into_payment['payment_mode'] = $payment_gateway_response['payment_mode'];			
+			$insert_into_payment['retry_transaction'] = $payment_gateway_response['retry'];
+			$insert_into_payment['response_code'] = $payment_gateway_response['response_code'];
+			$insert_into_payment['trans_date'] = $payment_gateway_response['trans_date'];
+			$insert_into_payment['created_at'] = date('Y-m-d H:i:s');
+
+			$insert_into_payment['payment_gateway_response'] = json_encode($payment_gateway_response) ;
+
+			if($this->db->insert('payment_details' , $insert_into_payment)){
+				$room_id = $payment_gateway_response['merchant_param2'];	
+				$order_id = $payment_gateway_response['order_id'];		
+				//echo "<pre>"; print_r($payment_gateway_response); exit;
+
+				if(trim($payment_gateway_response['order_status'])  == 'Success'){					
+					
+					$this->db->set('is_free','0')->where('id', $room_id)->update('rooms'); 
+					$this->db->set('status','Booked')->where('id', $order_id)->update('orders'); 
+
+				}else{
+				
+					$this->db->set('is_free','1')->where('id', $room_id)->update('rooms'); 
+					$this->db->set('status','Fail')->where('id', $order_id)->update('orders'); 
+				}
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+				
+			
+				
+	}
 		
 	function FrontsubmitRegister($post_data){
-		if($this->db->insert('users' , $post_data))
+		if($this->db->insert('users' , $post_data)){
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}	
+			
+	}
+
+	function sendOTP($inser_data,$last_id){
+
+		
+		$from = "fo@sitarahotelapartment.com";
+		$to = $inser_data['user_email'];
+		$otp = rand (1000 , 9999 );
+		$sub = "Email Verification";
+		$comp_name = "Sitara";
+
+		$data['comp_name'] = $comp_name;
+		$data['otp'] = $otp;
+		$email_verify_link = substr(md5(uniqid(rand(), true)), 16, 16); // 16 characters long
+		$data['email_verify_link'] = base_url().'varifyEmail/'. $email_verify_link;
+	
+		$msg  = $this->load->view('front/email_template/email_verify', $data,true);
+
+		$this->load->library('database_library');
+		$is_send = $this->database_library->sendEmail($from,$to,$sub,$msg,$comp_name);
+
+		$this->db->set('email_verify_link',$email_verify_link);
+		$this->db->where('user_id', $last_id);
+		$this->db->update('users'); 	
+
+		if($is_send){
+			
+			
+			return true;
+			
+		}else{
+			return false;
+		}
+
+
+	}
+
+	function resetPasswordSubmit($forgot_password_link,$user_password){
+		$user_password = md5($user_password);
+		$this->db->set('user_password',$user_password);
+		$this->db->where('forgot_password_link', $forgot_password_link);
+		$this->db->update('users'); 
+		if($this->db->affected_rows())
+			return true;
+		else
+			return false;
+	}
+
+
+	function forgotPassword($email){
+
+		
+		$from = "fo@sitarahotelapartment.com";
+		$to = $email;
+		$sub = "Change Password";
+		$msg = "password";
+		$comp_name = "Sitara";
+
+		$data['comp_name'] = $comp_name;
+		
+		$forgot_password_link = substr(md5(uniqid(rand(), true)), 16, 16); // 16 characters long
+		$data['forgot_password_link'] = base_url().'resetPassword/'.$forgot_password_link;
+
+
+		$msg  = $this->load->view('front/email_template/forgot_password', $data,true);
+
+		$this->load->library('database_library');
+		$is_send =  $this->database_library->sendEmail($from,$to,$sub,$msg,$comp_name);
+
+		$this->db->set('forgot_password_link',$forgot_password_link);
+		$this->db->where('user_email', $email);
+		$this->db->update('users'); 
+
+		if($is_send){	
+			
+			return true;
+			
+		}else{
+			return false;
+		}
+
+		
+
+
+	}
+
+	function insertIntoOrder($data,$user_id){
+		//echo "<pre>"; print_r($data); exit;
+		$insert_data = array(
+			'user_id' => $data->user_id,
+			'room_id' => $data->id,
+			'no_of_children' => $data->no_of_children,
+			'no_of_adults' => $data->no_of_adults,
+			'start_date_time' =>  date('Y-m-d 14:00:00',strtotime($data->start_date_time)) ,
+			'end_date_time' =>  date('Y-m-d 12:00:00',strtotime($data->end_date_time)) ,
+			'status' => 'pending',
+			'after_discount_amount' => $data->after_discount_amount,
+			'save_amount' => $data->save_amount,
+			'save_percentage' => $data->save_percentage,
+			'created_at' => date('Y-m-d H:i:s'),
+		);
+		//echo "<pre>"; print_r($insert_data); exit;
+		if($this->db->insert('orders' , $insert_data))
 			return $this->db->insert_id();
 		else	
 			return false;
 	}
 
-	function forgotPassword($email){
 
-		
-		$from = "sitara@gmail.com";
-		$to = $email;
-		$sub = "Forgot Password";
-		$msg = "password";
-		$comp_name = "Sitara";
-
-		$this->load->library('database_library');
-		return $this->database_library->sendEmail($from,$to,$sub,$msg,$comp_name);
-
-
-	}
 
 	function getRoomImagesWithRoomType($room_types){
 		$slider_images = 	 $this->db->where('title','rooms')->get('slider_images')->result();
@@ -50,22 +188,7 @@ class Home_Model extends CI_Model {
 	}
 
 
-	function getProducts($where = array()){
-
-		if( count($where) > 0 ){
-			$this->db->where($where);
-		}
-		
-
-		return $result =  $this->db->select('r.*,s.image as room_image,rt.name as heading')
-		->from('rooms as r')
-		->join('room_types as rt','rt.id = r.room_type_id')
-		->join('slider_images as s','s.room_type_id = rt.id')
-		->where('r.is_active', 1)
-		->group_by('r.id')
-		->order_by('r.id')
-		->get()->result();
-	}
+	
 
 	function getDashboard(){
 
@@ -121,10 +244,12 @@ class Home_Model extends CI_Model {
 			$this->db->where($where);
 		}
 
-		$result =  $this->db->select('r.*,s.image as room_image')->from('rooms as r')
+		$result =  $this->db->select('r.*,s.image as room_image')
+		->from('rooms as r')
 		->join('room_types as rt','rt.id = r.room_type_id')
 		->join('slider_images as s','s.room_type_id = rt.id')
 		->where('r.is_active', 1)
+		->where('r.is_free', 1)
 		->group_by('r.id')
 		->order_by('r.id')
 		->get()->result();
@@ -139,38 +264,100 @@ class Home_Model extends CI_Model {
 
 	}
 
-	function postFrontLogin($email,$pass){
-		//echo "<pre>"; print_r($email); exit;
-		$where = array('user_email' => $email,'user_password' => md5($pass),'user_role_id' => 2);
-		$this->db->select('user_id,user_name,user_fullname,user_image,user_email');
+	function getProducts($where = array()){
+
+		if( count($where) > 0 ){
+			$this->db->where($where);
+		}
+		// s.image as room_image,
+
+		$result =  $this->db->select('r.*,r.name as heading')
+		->from('rooms as r')
+		->join('room_types as rt','rt.id = r.room_type_id')		
+		->where('r.is_deleted', 0)
+		->where('rt.is_deleted', 0)
+	
+		->order_by('r.id')
+		->get()->result();
+
+		if($result){
+			foreach($result as $row){
+				if($row->room_amenities){
+					$row->amenities =  $this->db->select('title,image')->where_in('id', explode(',',$row->room_amenities))->get('services')->result();
+				}
+
+				if($row->room_highlight){
+					$row->highlights = $this->db->select('title,image')->where_in('id',explode(',',$row->room_highlight))->get('services')->result();
+				}
+
+				
+				$row->images = $this->db->select('title,image')->where('room_type_id',$row->room_type_id)->get('slider_images')->result();
+				
+			}
+		}
+
+		return $result;
+	}
+
+	function generateSession($id){
+		$where = array('user_id ' => $id,'user_role_id' => 2);
+		$this->db->select('is_verify_email,user_id,user_name,user_fullname,user_image,user_email');
 		$this->db->where($where);
 		$query = $this->db->get('users');
 		$result = $query->row();
-		//echo "<pre>"; print_r($result); exit;
+		
+
+		$newdata = array(
+			'user_fullname'  => $result->user_fullname,
+			'email'     => $result->user_email,
+			'logged_in' => $result->user_id,
+			'user_image' => $result->user_image
+		);
+		$this->session->set_userdata('user_session',$newdata);
+	}
+
+	function postFrontLogin($email,$pass){
+		$output_data = array();
+		$output_data['status'] = false;
+		$output_data['message'] = "Email or Password wrong.";
+		
+		$where = array('user_email' => $email,'user_password' => md5($pass),'user_role_id' => 2);
+		$this->db->select('is_verify_email,user_id,user_name,user_fullname,user_image,user_email');
+		$this->db->where($where);
+		$query = $this->db->get('users');
+		$result = $query->row();
+		
 		if(isset($result)){
 			$newdata = array(
-				'user_fullname'  => $result->user_fullname,
-				'email'     => $result->user_email,
-				'logged_in' => $result->user_id,
-				'user_image' => $result->user_image
-			);
-			$this->session->set_userdata('user_session',$newdata);
-			//echo "<pre>"; print_r($_SESSION); exit;
-			return true;
-		}else{
-			return false;
+			'user_fullname'  => $result->user_fullname,
+			'email'     => $result->user_email,
+			'logged_in' => $result->user_id,
+			'user_image' => $result->user_image
+		);
+		$this->session->set_userdata('user_session',$newdata);
+			
+			$output_data['status'] = true;
+			$output_data['message'] = "User data get successfully.";
+			//echo "<pre>"; print_r($result); exit;
+			if(!$result->is_verify_email){
+				$output_data['status'] = false;
+				$output_data['message'] = "Please verify your email address.";
+			}
+			
 		}
+
+		return $output_data;
 		
 	}
 
 	function getRoomTypesWithRooms(){
-		return $this->db->select('slider_images.*,room_types.name as room_type_name')
+		return $this->db->select('rooms.*,slider_images.image')
 		->from('slider_images')
-		->join('room_types','room_types.id = slider_images.room_type_id')
-		->where('room_types.is_active', 1)
+		->join('rooms','rooms.id = slider_images.room_type_id')
+		->where('rooms.is_deleted', '0')
 		->where('slider_images.title', 'rooms')
-		->order_by("room_types.id", "desc")
-		->group_by(array("room_types.id"))
+		->order_by("rooms.id", "desc")
+		->group_by(array("rooms.id"))
 		->get()->result();
 	}
 

@@ -26,6 +26,27 @@
               </a>
             </li>
 
+
+            <li class="<?php echo ($this->uri->segment(3) == 'highlights') ? 'active' : '' ?>">
+              <a href="<?php echo base_url() . 'Admin/services/highlights'; ?>">
+                <i class="fa fa-dashboard"></i> <span>Room Highlights</span> </i>
+              </a>
+            </li>
+
+            <li class="<?php echo ($this->uri->segment(3) == 'amenities') ? 'active' : '' ?>">
+              <a href="<?php echo base_url() . 'Admin/services/amenities'; ?>">
+                <i class="fa fa-dashboard"></i> <span>Room Amenities</span> </i>
+              </a>
+            </li>
+
+            <li class="<?php echo ($this->uri->segment(2) == 'rooms') ? 'active' : '' ?>">
+              <a href="<?php echo base_url() . 'Admin/rooms'; ?>">
+                <i class="fa fa-dashboard"></i> <span>Rooms</span> </i>
+              </a>
+            </li>
+
+            
+
             <li class="<?php echo ($this->uri->segment(2) == 'gallery') ? 'active' : '' ?>">
               <a href="<?php echo base_url() . 'Admin/gallery'; ?>">
                 <i class="fa fa-dashboard"></i> <span>Gallery</span> </i>
@@ -33,7 +54,14 @@
             </li>
 
 
-            <li class="treeview">
+            <li class="<?php echo ($this->uri->segment(2) == 'getOrders') ? 'active' : '' ?>">
+              <a href="<?php echo base_url() . 'Admin/getOrders'; ?>">
+                <i class="fa fa-dashboard"></i> <span>Orders</span> </i>
+              </a>
+            </li>
+
+
+            <!-- <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -42,53 +70,11 @@
                     <a href="<?php echo base_url() . 'Admin/getOrders'; ?>"><i class="fa fa-circle-o"></i>Orders</a></li>
                 
               </ul>
-            </li>
+            </li> -->
 
           
-            <!-- <li class="active treeview">
-              <a href="<?php echo base_url() . 'Admin/dashboard'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li>
-
-            <li class="treeview">
-              <a href="<?php echo base_url() . 'Admin/usersManagement'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li>
-
-
-
-            <li class="treeview">
-              <a href="<?php echo base_url() . 'Admin/messageManagement'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Message Management</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li> -->
-
-
-
-
-
-            <!-- <li class="treeview">
-              <a href="<?php echo base_url() . 'Admin/adminAlbumManagement'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Admin Album</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li>
-			
-			 -->
-            <!-- <li class="treeview">
-              <a href="<?php echo base_url() . 'Admin/videoManagement'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Video Management</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li> -->
-
-
-            <!-- <li class="treeview">
-              <a href="<?php echo base_url() . 'Admin/siteManagement'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Site Setting</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li> -->
-
+            
+          
           </ul>
         </section>
       </aside>

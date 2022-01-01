@@ -22,6 +22,9 @@
       <div class="login-box-body">
       <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg');?></h3>
         <form action="<?php echo base_url();?>Login/submitLogin" method="post">
+
+        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+        
           <div class="form-group has-feedback">
             <input type="email" name="email"  id="email" class="form-control" placeholder="Email">
             <div class="error"><?php echo form_error('email'); ?></div>  

@@ -54,6 +54,7 @@ class Admin extends CI_Controller {
 		}
 
 		$data['result'] = $this->Main_Model->getOrders();
+	//	echo "<pre>"; print_r($data); exit;
 		
 		$data['main_contain'] = 'admin/orders/index';
 		$this->load->view('admin/includes/template',$data);
@@ -65,6 +66,22 @@ class Admin extends CI_Controller {
 		$data['main_contain'] = 'admin/room_types/index';
 		$this->load->view('admin/includes/template',$data);
 	}
+
+	public function services($slug){
+		
+		$data['result'] = $this->Main_Model->getServices($slug);
+		//echo "<pre>"; print_r($data['result']); exit;
+		$data['main_contain'] = 'admin/services/index';
+		$this->load->view('admin/includes/template',$data);
+	}
+
+	function rooms(){
+		$data['result'] = $this->Main_Model->getRooms();
+		//echo "<pre>"; print_r($data['result']); exit;
+		$data['main_contain'] = 'admin/rooms/index';
+		$this->load->view('admin/includes/template',$data);
+	}
+	
 	
 	function addRoomType(){
 		if(!empty($this->input->post('submit'))){
@@ -72,44 +89,203 @@ class Admin extends CI_Controller {
 		
 		
 			if (!$this->form_validation->run() == FALSE){
-				$name = $this->input->post('name');
-				
-				if(!empty($_FILES['image'])){
-					$upload_path = FRONT_CSS_JS."images/";
-					$image_title = "room_type";
-					$image_file = "image";
-					$newimagenames = $this->database_library->multipleImageUpload($upload_path,$image_file,$image_title);		
-					
-				}
+				$name = $this->input->post('name');			
 				
 				$sql = "INSERT INTO `room_types` (name) VALUES('$name')" ;
 				$room_type_id = $this->Main_Model->addUserAlbum($sql);
-
-
-			
-				if(!empty($newimagenames)){
-					$values = "";	$user_id = 1; 
-					foreach( $newimagenames as $row ){
-						$values .= "($room_type_id,'rooms', '".'images/'.$row."','".date('Y-m-d H:i:s')."'),"; 
-					}
-	
-					$sql = "INSERT INTO `slider_images` (room_type_id,title, image,created_at) VALUES $values";
-					$sql = substr($sql,0,-1);	
-				
-					$this->Main_Model->addUserAlbum($sql);
-				}
-
-				
+				$this->session->set_flashdata('suc_msg_room_type_add', "<span style='color:green' >Room Type add successfully</span>");
+				$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >Room Type add successfully</span>");
+				redirect(base_url().'admin/roomTypes');
 			}
 		}
 		
 		$data['main_contain'] = 'admin/room_types/add';
 		$this->load->view('admin/includes/template',$data);
 	}
+
+	function addService(){
+		if(!empty($this->input->post('submit'))){
+			$this->form_validation->set_rules('name', 'Name', 'required');
+		
+		
+			if (!$this->form_validation->run() == FALSE){
+				$name = $this->input->post('name');		
+				$service_type_id = $this->input->post('service_type_id');		
+				$service_type_slug = $this->input->post('service_type_slug');	
+
+				$insert_data['title'] = $name;
+				
+				$insert_data['service_type_id'] = ($service_type_slug == 'highlights') ? '1' : '2';
+				$this->db->insert('services',$insert_data);
+
+				$success_messge = "Room Amenities add successfully";
+				if($service_type_slug == 'highlights'){
+					$success_messge = "Room Highlights add successfully";
+				}
+				
+				$this->session->set_flashdata('suc_msg_room_type_add', "<span style='color:green' >".$success_messge."</span>");
+				$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >".$success_messge."</span>");
+				redirect(base_url().'admin/services/'.$service_type_slug);
+			}
+		}
+		
+		$data['main_contain'] = 'admin/services/add';
+		$this->load->view('admin/includes/template',$data);
+	}
+
+	function editService(){
+		if(!empty($this->input->post('submit'))){
+
+			
+			$service_id = $this->input->post('service_id');
+			$name = $this->input->post('name');
+			$service_type_slug = $this->input->post('service_type_slug');	
+
+			if($this->input->post('name')){
+				$this->db->set('title', $name);
+				$this->db->where('id',  $service_id);
+				$this->db->update('services'); 
+
+			}
+
+			$success_messge = "Room Amenities Update successfully";
+			if($service_type_slug == 'highlights'){
+				$success_messge = "Room Highlights Update successfully";
+			}
+		
+			$this->session->set_flashdata('suc_msg_room_type_update', "<span style='color:green' >".$success_messge."</span>");
+			redirect(base_url().'admin/services/'.$service_type_slug);
+				
+		}
+		$id = $this->uri->segment('3');
+		$data['result'] = $this->Main_Model->getServiceById($id);
+		
+		//echo "<pre>"; print_r($data); exit;
+		$data['main_contain'] = 'admin/services/update';
+		$this->load->view('admin/includes/template',$data);
+	}
+
+	function addRoom(){
+		if(!empty($this->input->post('submit'))){
+			$this->form_validation->set_rules('name', 'Name', 'required');
+		
+		
+			if (!$this->form_validation->run() == FALSE){
+				
+				$room_type_id = $this->input->post('room_type_id');
+				$name = $this->input->post('name');
+				$description = $this->input->post('description');
+				$no_of_children = $this->input->post('no_of_children');
+				$no_of_adults = $this->input->post('no_of_adults');
+
+				$no_of_children = 1;
+				$no_of_adults = 1;
+
+			
+
+				$amount = $this->input->post('amount');
+				$save_percentage = $this->input->post('save_percentage');
+				
+				$room_highlight = $this->input->post('room_highlight');
+				$room_amenities = $this->input->post('room_amenities');
+				if($room_highlight){
+					$room_highlight = implode(',',$room_highlight);
+				}else{
+					$room_highlight = "";
+				}
+	
+				if($room_amenities){
+					$room_amenities = implode(',',$room_amenities);
+				}else{
+					$room_amenities = "";
+				}
+
+				
+				$after_discount_amount = $amount;
+				$save_amount = "0";
+				if($save_percentage){
+					$save_amount =  ($save_percentage / 100) * (float)$amount;
+					$after_discount_amount = (float)$amount - (float)$save_amount;
+				}
+				
+				$user_id = 1;
+				$created_at = date('Y-m-d H:i:s');
+				$insert_data = array(
+					'room_type_id' => $room_type_id,
+					'name' => $name,
+					'description' => $description,
+					'no_of_children' => $no_of_children,
+					'no_of_adults' => $no_of_adults,
+					'amount' => $amount,
+					'after_discount_amount' => $after_discount_amount,
+					'save_amount' => $save_amount,
+					'save_percentage' => $save_percentage,	
+					'room_highlight' => $room_highlight,	
+					'room_amenities' => $room_amenities,	
+					'created_by' => $user_id,	
+					'updated_by' => $user_id,	
+					'created_at' => $created_at,	
+					'updated_at' => $created_at,	
+					
+
+
+				);
+			//	echo "<pre>";print_r($insert_data); exit;
+				$this->db->insert('rooms',$insert_data);
+				$rooms_id = $this->db->insert_id(); 
+
+				
+				if($_FILES['image']['name'][0]){
+					$upload_path = FRONT_CSS_JS."images/";
+					$image_title = "rooms_";
+					$image_file = "image";
+					$newimagenames = $this->database_library->multipleImageUpload($upload_path,$image_file,$image_title);		
+					
+				}
+				
+				
+
+
+			
+				if(!empty($newimagenames)){
+					$values = "";	$user_id = 1; 
+					foreach( $newimagenames as $row ){
+						if($row){
+							
+							$values .= "($rooms_id,'rooms', '".'images/'.$row."','".date('Y-m-d H:i:s')."'),"; 
+						}
+						
+					}
+					if($values){
+						$sql = "INSERT INTO `slider_images` (room_type_id,title, image,created_at) VALUES $values";
+						$sql = substr($sql,0,-1);	
+						$this->Main_Model->addUserAlbum($sql);
+					}
+	
+					
+				
+					
+				}
+				
+
+				$this->session->set_flashdata('suc_msg_room_type_add', "<span style='color:green' >Room add successfully</span>");
+				$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >Room add successfully</span>");
+				redirect(base_url().'admin/rooms');
+				
+			}
+		}
+		$data['numbers'] = [1,2,3,4,5,6,7,8,9,10];	
+		$data['discounts'] = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100];
+		$data['services'] = $this->Main_Model->getRoomServices();	
+		$data['room_types'] = $this->Main_Model->getRoomTypes();	
+		$data['main_contain'] = 'admin/rooms/add';
+		$this->load->view('admin/includes/template',$data);
+	}
 	
 	function editRoomType(){
 		if(!empty($this->input->post('submit'))){
 
+			
 			$room_type_id = $this->input->post('room_type_id');
 			if($this->input->post('name')){
 				$this->db->set('name', $this->input->post('name'));
@@ -117,26 +293,9 @@ class Admin extends CI_Controller {
 				$this->db->update('room_types'); 
 
 			}
-
-			if(!empty($_FILES['image'])){
-				$upload_path = FRONT_CSS_JS."images/";
-				$image_title = "room_type";
-				$image_file = "image";
-				$newimagenames = $this->database_library->multipleImageUpload($upload_path,$image_file,$image_title);		
-
-				if(!empty($newimagenames)){
-					$values = "";	$user_id = 1; 
-					foreach( $newimagenames as $row ){
-						$values .= "($room_type_id,'rooms', '".'images/'.$row."','".date('Y-m-d H:i:s')."'),"; 
-					}
-	
-					$sql = "INSERT INTO `slider_images` (room_type_id,title, image,created_at) VALUES $values";
-					$sql = substr($sql,0,-1);	
-				
-					$this->Main_Model->addUserAlbum($sql);
-				}
-				
-			}
+			
+			$this->session->set_flashdata('suc_msg_room_type_update', "<span style='color:green' >Room Type Update successfully</span>");
+			redirect(base_url().'admin/roomTypes');
 				
 		}
 		$id = $this->uri->segment('3');
@@ -146,16 +305,162 @@ class Admin extends CI_Controller {
 		$data['main_contain'] = 'admin/room_types/update';
 		$this->load->view('admin/includes/template',$data);
 	}
+
+	function editRoom(){
+		if(!empty($this->input->post('submit'))){
+
+			$room_type_id = $this->input->post('room_type_id');
+			$name = $this->input->post('name');
+			$description = $this->input->post('description');
+			$no_of_children = $this->input->post('no_of_children');
+			$no_of_adults = $this->input->post('no_of_adults');
+
+			$no_of_children = 1;
+			$no_of_adults = 1;
+
+			$amount = $this->input->post('amount');
+			$save_percentage = $this->input->post('save_percentage');
+
+
+			$room_highlight = $this->input->post('room_highlight');
+			$room_amenities = $this->input->post('room_amenities');			
+
+			if($room_highlight){
+				$room_highlight = implode(',',$room_highlight);
+			}else{
+				$room_highlight = "";
+			}
+
+			if($room_amenities){
+				$room_amenities = implode(',',$room_amenities);
+			}else{
+				$room_amenities = "";
+			}
+			
+			$after_discount_amount = "0";
+			$save_amount = "0";
+			if($save_percentage){
+				$save_amount =  ($save_percentage / 100) * (float)$amount;
+				$after_discount_amount = (float)$amount - (float)$save_amount;
+			}
+			
+			$user_id = 1;
+			$created_at = date('Y-m-d H:i:s');
+			
+			$room_id = $this->input->post('room_id');			
+			
+			$this->db->set('room_type_id', $room_type_id);
+			$this->db->set('name', $name);
+			$this->db->set('description', $description);
+			$this->db->set('no_of_children', $no_of_children);
+			$this->db->set('no_of_adults', $no_of_adults);
+			$this->db->set('amount', $amount);
+			$this->db->set('save_percentage', $save_percentage);
+			$this->db->set('updated_by', $user_id);
+			$this->db->set('updated_at', $created_at);
+			$this->db->set('after_discount_amount', $after_discount_amount);
+			$this->db->set('save_amount', $save_amount);
+			
+			$this->db->set('room_highlight', $room_highlight);
+			$this->db->set('room_amenities', $room_amenities);
+
+			$this->db->where('id',  $room_id);
+			$this->db->update('rooms'); 
+
+			
+
+			if($_FILES['image']['name'][0]){
+				$upload_path = FRONT_CSS_JS."images/";
+				$image_title = "room_";
+				$image_file = "image";
+				$newimagenames = $this->database_library->multipleImageUpload($upload_path,$image_file,$image_title);		
+				
+
+				if(!empty($newimagenames)){
+					$values = "";	$user_id = 1; 
+					foreach( $newimagenames as $row ){
+						if($row){
+							$values .= "($room_id,'rooms', '".'images/'.$row."','".date('Y-m-d H:i:s')."'),"; 
+						}						
+					}
+	
+					if($values){
+						$sql = "INSERT INTO `slider_images` (room_type_id,title, image,created_at) VALUES $values";
+						$sql = substr($sql,0,-1);	
+						$this->Main_Model->addUserAlbum($sql);
+					}
+					
+				
+					
+				}
+
+				
+			}
+			$this->session->set_flashdata('suc_msg_room_type_update', "<span style='color:green' >Room Update successfully</span>");
+			$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >Room Update successfully</span>");
+			redirect(base_url().'admin/rooms');
+				
+		}
+		$id = $this->uri->segment('3');
+		$data['result'] = $this->Main_Model->getRoomsById($id);
+		$data['images'] = $this->Main_Model->getRoomImagesById($id);
+		$data['room_types'] = $this->Main_Model->getRoomTypes();	
+
+		$data['services'] = $this->Main_Model->getRoomServices();	
+
+		$data['numbers'] = [1,2,3,4,5,6,7,8,9,10];	
+		$data['discounts'] = [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100];
+		$data['room_highlight'] = ($data['result']->room_highlight) ? explode(',',$data['result']->room_highlight) : array();
+		$data['room_amenities'] = ($data['result']->room_amenities) ? explode(',',$data['result']->room_amenities) : array();
+
+		
+		//echo "<pre>"; print_r($data); exit;
+		$data['main_contain'] = 'admin/rooms/update';
+		$this->load->view('admin/includes/template',$data);
+	}
 	
 	
 	function deleteRoomType($id){		
 		$affected = $this->Main_Model->deleteRoomType($id);
 		if($affected){
-			$this->session->set_flashdata('suc_msg', "<span style='color:green' >Room Type Deleted Succefully.</span>");
+			$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >Room Type Deleted Succefully.</span>");
 		}else{
-			$this->session->set_flashdata('suc_msg', "<span style='color:red' >Room Type  Not Deleted Succefully.</span>");
+			$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:red' >Room Type  Not Deleted Succefully.</span>");
 		}
 		redirect(base_url().'admin/roomTypes');
+		
+	}
+
+
+	function deleteService($id,$service_type_slug){		
+		$affected = $this->Main_Model->deleteService($id);
+
+		$success_messge = "Room Amenities Deleted successfully";
+		$not_success_messge = "Room Amenities Not Deleted successfully";
+		if($service_type_slug == 'highlights'){
+			$success_messge = "Room Highlights Deleted successfully";
+			$not_success_messge = "Room Highlights Not Deleted successfully";
+		}
+			
+		
+		if($affected){
+			$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >".$success_messge."</span>");
+		}else{
+			$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:red' >".$not_success_messge."</span>");
+		}
+		redirect(base_url().'admin/services/'.$service_type_slug);
+		
+	}
+
+	function deleteRoom($id){		
+		//echo "<pre>"; print_r($id); exit;
+		$affected = $this->Main_Model->deleteRoom($id);
+		if($affected){
+			$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >Room Deleted Succefully.</span>");
+		}else{
+			$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:red' >Room Not Deleted Succefully.</span>");
+		}
+		redirect(base_url().'admin/rooms');
 		
 	}
 
@@ -163,9 +468,9 @@ class Admin extends CI_Controller {
 		$id = $this->input->post('id');	
 		$affected = $this->Main_Model->deleteRoomTypeImage($id);
 		if($affected){
-			$this->session->set_flashdata('suc_msg', "<span style='color:green' >Image Deleted Succefully.</span>");
+			$this->session->set_flashdata('suc_msg_room_type_update', "<span style='color:green' >Image Deleted Succefully.</span>");
 		}else{
-			$this->session->set_flashdata('suc_msg', "<span style='color:red' >Image  Not Deleted Succefully.</span>");
+			$this->session->set_flashdata('suc_msg_room_type_update', "<span style='color:red' >Image  Not Deleted Succefully.</span>");
 		}
 	//	redirect(base_url().'admin/roomTypes');
 		
@@ -177,8 +482,10 @@ class Admin extends CI_Controller {
 		//echo $this->db->last_query(); exit;
 		if($data){
 			//echo $this->db->last_query();
+			$this->session->set_flashdata('suc_msg_gallery_index', "<span style='color:green' >Image Deleted Succefully.</span>");
 			echo "Image deleted successfully";
 		}else{
+			$this->session->set_flashdata('suc_msg_gallery_index', "<span style='color:red' >Image Not Deleted Succefully.</span>");
 			echo "Image not deleted successfully";
 		}
 		
@@ -186,7 +493,8 @@ class Admin extends CI_Controller {
 
 	function gallery(){
 		if(!empty($this->input->post('submit'))){
-			if(!empty($_FILES['user_album_images']['name'])){
+			$newimagenames = "";
+			if(!empty($_FILES['user_album_images']['name'][0])){
 				$upload_path = FRONT_CSS_JS."images/";
 				$image_title = "home_page";
 				$image_file = "user_album_images";
@@ -195,7 +503,7 @@ class Admin extends CI_Controller {
 
 			}
 
-			
+			//echo "<pre>"; print_r($newimagenames); exit;
 			
 			if(!empty($newimagenames)){
 				$values = "";	$user_id = 1; 
@@ -207,6 +515,7 @@ class Admin extends CI_Controller {
 				$sql = substr($sql,0,-1);	
 			
 				$this->Main_Model->addUserAlbum($sql);
+				$this->session->set_flashdata('suc_msg_gallery_index', "<span style='color:green' >Image Add Succefully.</span>");
 			}
 				
 				

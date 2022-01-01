@@ -153,13 +153,41 @@ class Database_library {
 	
 	function sendEmail($from,$to,$subject,$message,$name){
 
-		$this->CI->load->library('email');
+		// $config = Array(
+		// 	'protocol' => 'smtp',
+		// 	'smtp_host' => 'smtp.mailtrap.io',
+		// 	'smtp_port' => 587,
+		// 	'smtp_user' => 'b0bc6232910a00',
+		// 	'smtp_pass' => 'da35f0593afb2d',
+		// 	'mailtype'  => 'html', 
+		// 	'charset'   => 'iso-8859-1'
+		// );
+		// $this->CI->load->library('email', $config);
+
+		//$this->email->initialize($config);
+	//	$this->email->set_mailtype("html");
+	//	$this->email->set_newline("\r\n");
+
+		$config=array(
+		'charset'=>'utf-8',
+		'wordwrap'=> TRUE,
+		'mailtype' => 'html'
+		);
+		
+		$this->CI->load->library('email', $config);
+		
+
+		$this->CI->email->set_mailtype("html");
+		
 		$this->CI->email->from($from, $name);
-		$this->CI->email->to($to);
-		$this->CI->email->cc('another@another-example.com');
-		$this->CI->email->bcc('them@their-example.com');
+		$this->CI->email->to($to);		
 		$this->CI->email->subject($subject);
 		$this->CI->email->message($message);
+		try {
+		
+		} catch (\Exception $e) {
+			echo "<pre>"; print_r($e); exit;
+		}
 		if($this->CI->email->send())
 			return true;
 		else

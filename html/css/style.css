@@ -1,3 +1,12 @@
+.newbanner{
+background-size: cover;
+background-position: top left;
+background-attachment: fixed;
+height: 450px !important;
+padding-top: 18% !important;
+padding-left: 0px !important;
+padding-right: 0px !important;
+}
 body{
  font-family: 'Raleway', sans-serif;
   }
@@ -2000,7 +2009,7 @@ padding: 3px 0px;
 }
 .services_list h4{
   display: block;
-  padding: 20px;
+padding: 9px 0px;
 }
 .active_alpha{
   background: #373737;
@@ -2438,10 +2447,11 @@ width: 240px;
   outline: none;
 }
 .children_box{
-  background: #fff;
-  padding: 15px 13px;
+  border: 1px solid #fff;
+  background: transparent;
+  padding: 5px 13px;
       width: 100%;
-      box-shadow: 0 2px 12px rgb(0 0 0 / 30%);
+      /*box-shadow: 0 2px 12px rgb(0 0 0 / 30%);*/
 }
 .relativepos{
   position: relative;
@@ -2449,25 +2459,57 @@ width: 240px;
 .minusCount{
   display: inline-block;
   float: left;
-  border: 1px solid #373737;
+  border: 0px solid #fff;
     border-radius: 2px;
     background: transparent;
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 1;
+        color: #fff;
     transition: all .4s ease-in-out;
+    -webkit-appearance: media-volume-sliderthumb;
+}
+
+.pro_ad  .minusCount{
+  display: inline-block;
+  float: left;
+  border: 0px solid #fff;
+    border-radius: 2px;
+    background: transparent;
+    cursor: pointer;
+    opacity: 1;
+        color: #373737;
+    transition: all .4s ease-in-out;
+    -webkit-appearance: media-volume-sliderthumb;
 }
 .minusCount.active , .addcount.active{
   opacity: 1;
 }
+button:focus{
+  outline: none;
+}
 .addcount{
   display: inline-block;
   float: right;
-  border: 1px solid #373737;
+  border: 0px solid #fff;
     border-radius: 2px;
      background: transparent;
      cursor: pointer;
-     opacity: 0.5;
+     opacity: 1;
+         color: #fff;
      transition: all .4s ease-in-out;
+     -webkit-appearance: media-volume-sliderthumb;
+}
+.pro_ad .addcount{
+  display: inline-block;
+  float: right;
+  border: 0px solid #fff;
+    border-radius: 2px;
+     background: transparent;
+     cursor: pointer;
+     opacity: 1;
+         color: #373737;
+     transition: all .4s ease-in-out;
+     -webkit-appearance: media-volume-sliderthumb;
 }
 .addcount:hover, .minusCount:hover{
   background: #373737;
@@ -2475,23 +2517,48 @@ width: 240px;
   transition: all .4s ease-in-out;
 
 }
+
+.pro_ad .children_box{
+  border: 1px solid #373737;
+  background: transparent;
+  padding: 5px 13px;
+      width: 100%;
+      /*box-shadow: 0 2px 12px rgb(0 0 0 / 30%);*/
+}
+
+.pro_ad .adultInput{
+    display: inline-block;
+    float: left;
+    width: calc(100% - 65px);
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+        color: #373737;
+}
+
+
 .adultInput{
     display: inline-block;
     float: left;
     width: calc(100% - 65px);
     text-align: center;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
     border: none;
+    background: transparent;
+        color: #fff;
 }
 .childrenCount {
     margin: 0;
-    margin-bottom: 10px;
-    position: absolute;
+    margin-bottom: 0px;
+   /* position: absolute;*/
     left: 0;
     right: 0;
     z-index: 9;
 }
+
 .carouselstudio .carousel-item{
   background-size: cover;
   background-position: center;
@@ -2527,8 +2594,28 @@ width: 240px;
 }
 
 
+.services_list_para{
+color: #373737;
+font-weight: 600;
+margin-bottom: 10px;
+font-size: 14px;
+padding: 0px 20px;
+}
+
+
+
+
+
 
 @media only screen and (max-width: 992px){
+.book_hotel{
+  margin-top: 10px !important;
+}
+  .bannertext .new-content .col{
+    flex-basis: unset;
+    max-width: 50%;
+}
+}
 .bx_content{
   opacity: 1;
 }

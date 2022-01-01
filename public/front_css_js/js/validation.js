@@ -1,5 +1,9 @@
 $(function() {
 
+    $.validator.addMethod('custom_rule_for_room', function(value) {
+        return parseInt(value) > 0;
+    }, 'Please Select Valid Room');
+
     $("#front_login").validate({
 
         rules: {
@@ -16,9 +20,9 @@ $(function() {
                 required: true,
                 minlength: 5
             },
-            user_checkbox : "required"
+            user_checkbox: "required"
 
-            
+
         },
 
         messages: {
@@ -47,6 +51,10 @@ $(function() {
             room_type: {
                 required: true,
             },
+            no_of_room: {
+                required: true,
+                custom_rule_for_room: true
+            },
             room_start_date: {
                 required: true
             },
@@ -65,6 +73,7 @@ $(function() {
 
         messages: {
             room_type: "Please Select Room Type",
+            no_of_room: "Please Select Valid Room",
             room_start_date: "Please Select Date",
             room_end_date: "Please Select Date",
             room_no_of_adult: "Please Select Number of Adult",
@@ -107,11 +116,12 @@ $(function() {
             },
             user_confirm_password: {
                 required: true,
-                minlength: 5
+                minlength: 5,
+                equalTo: "#user_password"
             },
-            user_checkbox : "required"
+            user_checkbox: "required"
 
-            
+
         },
 
         messages: {
@@ -122,7 +132,8 @@ $(function() {
             },
             user_confirm_password: {
                 required: "Please enter Password",
-                minlength: "Your password must be at least 5 characters long"
+                minlength: "Your password must be at least 5 characters long",
+                equalTo: "Enter Confirm Password Same as Password "
             },
             user_email: "Please enter a valid email address",
             user_checkbox: "Please check terms and Condtions"
@@ -131,28 +142,62 @@ $(function() {
             form.submit();
         }
     });
-    
-    
+
+    $("#reset_password").validate({
+
+        rules: {
+
+            user_password: {
+                required: true,
+                minlength: 5
+            },
+            user_confirm_password: {
+                required: true,
+                minlength: 5,
+                equalTo: "#user_password"
+            }
+
+
+        },
+
+        messages: {
+            user_password: {
+                required: "Please enter Password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            user_confirm_password: {
+                required: "Please enter Password",
+                minlength: "Your password must be at least 5 characters long",
+                equalTo: "Enter Confirm Password Same as Password "
+            }
+
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+
 
     $("#front_feedback").validate({
 
         rules: {
-            feedback_subject: "required",            
-            feedback_comment : "required"            
+            feedback_subject: "required",
+            feedback_comment: "required"
         },
 
         messages: {
-            feedback_subject: "Please enter subject",            
+            feedback_subject: "Please enter subject",
             feedback_comment: "Please enter commect"
         },
         submitHandler: function(form) {
             form.submit();
         }
     });
-    
+
 });
 
 
-function registrationFormReset(){
+function registrationFormReset() {
     $('#front_register')[0].reset();
 }

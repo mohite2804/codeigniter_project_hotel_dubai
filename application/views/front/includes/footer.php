@@ -6,6 +6,7 @@
 
       <div class="col-12 col-lg-3 col-xl-3 col-md-12">
         <img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/footer_logo.svg" class="img-fluid" style="width: 200px;">
+        <p style="color: #FFF;font-size: 16px;letter-spacing: 1px;text-indent: 14px;">Sitara Hotel Apartment LLC</p>
       </div>
 
       <div class="col-12 col-lg-3 col-xl-3 col-md-12">
@@ -20,7 +21,7 @@
       <div class="col-12 col-lg-3 col-xl-3 col-md-12">
         <h3>Service</h3>
         <ul class="footer_link">
-          <li><a href="<?php echo base_url() . 'privacy-policy'; ?>">Privacy Policy</a></li>
+          <li><a href="<?php echo base_url() . 'privacy-policy'; ?>">Refund Policy</a></li>
           <li><a href="<?php echo base_url() . 'terms-and-conditions'; ?>">Terms and Conditions</a></li>
           <li><a href="<?php echo base_url() . 'contact'; ?>">Contact</a></li>
 
@@ -29,10 +30,12 @@
       <div class="col-12 col-lg-3 col-xl-3 col-md-12">
         <h3>Follow us</h3>
         <ul class="footer_link">
-          <li><a href=""><i class="icofont-facebook"></i> Facebook</a></li>
-          <li><a href=""><i class="icofont-twitter"></i> Twitter</a></li>
-          <li><a href=""><i class="icofont-instagram"></i> Instagram</a></li>
-          <li><a href=""><i class="icofont-youtube-play"></i> Youtube</a></li>
+          <li><a data-toggle="tooltip" data-placement="top"  title="Under Construction" href="javascript:void(0)"><i class="icofont-facebook"></i> Facebook</a></li>
+          <li><a data-toggle="tooltip" data-placement="top"  title="Under Construction" href="javascript:void(0)"><i class="icofont-twitter"></i> Twitter</a></li>
+          <li><a data-toggle="tooltip" data-placement="top"  title="Under Construction" href="javascript:void(0)"><i class="icofont-instagram"></i> Instagram</a></li>
+          <li><a data-toggle="tooltip" data-placement="top"  title="Under Construction" href="javascript:void(0)"><i class="icofont-youtube-play"></i> Youtube</a></li>
+
+         
         </ul>
       </div>
 

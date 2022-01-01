@@ -2,7 +2,7 @@
   <div class="container-fluid nopadding">
     <div class="row sidespace">
       <div class="col-6 col-lg-6  col-xl-6 col-md-12 ">
-        <div id="google_translate_element" style="display:none"></div>
+        <div id="google_translate_element" style="display: none;" ></div>
 
 
         <p class="lang_bar text-left">
@@ -12,6 +12,9 @@
           <a href="javascript:void(0);" class="areb_lang" translate="no" onclick="changeLanguageByButtonClick()">
             <input value="ar" id="language" /> Arabic</a>
         </p>
+
+     
+       
 
 
 
@@ -79,14 +82,14 @@
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a href="location.html" class="nav-link"><i class="icofont-location-pin"></i> &nbsp;Location</a>
+            <a href="javascript:void(0)" class="nav-link"> &nbsp;Sitara Hotel Apartment</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="" class="nav-link"><i class="icofont-ui-call"></i> &nbsp;+91 8989876789</a>
           </li>
           <li class="nav-item">
             <a href="" class="nav-link last-nav-link"><i class="icofont-ui-cell-phone"></i> &nbsp;+91 78767878987</a>
-          </li>
+          </li> -->
 
 
         </ul>

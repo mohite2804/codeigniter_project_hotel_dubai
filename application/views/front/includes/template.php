@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 
 <head>
     <meta charset="UTF-8">
@@ -26,9 +27,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url() . FRONT_CSS_JS; ?>css/style.css" />
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
+
+
 
 
     <div class="pagecontainer">
@@ -49,14 +57,19 @@
 
 
     <a href="#top" class="back_top">Back to Top <i class="fa fa-angle-up" aria-hidden="true"></i></a>
-    <button type="button" class="feedbackBtn">Feedback</button>
+    <!-- <button type="button" class="feedbackBtn">Feedback</button> -->
+    
 </body>
 
 </html>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() . FRONT_CSS_JS; ?>js/dropdown_datepicker/bootstrap-select.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
@@ -69,15 +82,13 @@
 <script type="text/javascript" src="<?php echo base_url() . FRONT_CSS_JS; ?>js/main.js"></script>
 
 <script>
-    $(document).ready(function() {
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+  $('.suc_msg_hide').delay(3000).fadeOut('slow');
+  
+});
+</script>
 
-        // var selected_language = sessionStorage.getItem("selected_language");       
-        // if (selected_language && selected_language == 'Arabic') {         
-        //     changeLanguageByButtonClick();
-        // } else {
-        //     changeLanguageByButtonClick_en();
-
-        // }
-
-    });
+<script>
+    
 </script>

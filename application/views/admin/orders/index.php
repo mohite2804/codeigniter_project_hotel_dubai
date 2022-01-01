@@ -28,20 +28,11 @@
           <div class="row">
             <div class="col-xs-12">
 
-              <div class="form-group">
-                <label>Date range:</label>
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input id="reservation" name="date_range" type="text" class="form-control pull-right data_range">
-                </div>
-              </div>
-
+             
               <form class="form-inline" action="" method="post">
 
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="email">Status:</label>
                   <select name="payment_status" class="form-control">
                     <option value="">All</option>
@@ -49,12 +40,12 @@
                     <option value="pa">Paid</option>
                     <option value="c">Canceled</option>
                   </select>
-                </div>
+                </div> -->
 
 
 
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Date range:</label>
                   <div class="input-group">
                     <div class="input-group-addon">
@@ -62,9 +53,9 @@
                     </div>
                     <input id="reservation" name="date_range" type="text" class="form-control pull-right data_range">
                   </div>
-                </div>
+                </div> -->
 
-                <input type="submit" name="submit" value="submit" class="btn btn-primary">
+                <!-- <input type="submit" name="submit" value="submit" class="btn btn-primary"> -->
               </form>
 
 
@@ -86,18 +77,25 @@
                     <thead>
                       <tr>
                         <th class="col-xs-1">No.</th>
-                        <th class="col-xs-2">Room Type</th>
-                        <th class="col-xs-2">Full Name</th>
-                        <th class="col-xs-1">Email</th>
-                        <th class="col-xs-1">Mobile No</th>
+                        <th class="col-xs-1">Room Type</th>
+                        <th class="col-xs-1">Room</th>
+                        <th class="col-xs-1">Payment Status</th>
 
+                        <th class="col-xs-1">Check In</th>
+                        <th class="col-xs-1">Check Out</th>
+
+                        <th class="col-xs-1">Amount</th>
+                        <th class="col-xs-1">Full Name</th>
+                        <th class="col-xs-1">Email</th>
+                       
                         <th class="col-xs-1">No of Adults</th>
                         <th class="col-xs-1">No of Children</th>
-                        <th class="col-xs-1">Start Date</th>
-                        <th class="col-xs-1">End Date</th>
-                        <th class="col-xs-1">Amount</th>
 
-                        <th class="col-xs-1">Payment Status</th>
+                        <th class="col-xs-1">Booking Date And Time</th>
+                        <!-- <th class="col-xs-1">Action</th> -->
+                        
+
+                       
 
 
                       </tr>
@@ -109,17 +107,26 @@
                           <tr>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $row->room_type; ?></td>
+                            <td><?php echo $row->room_name; ?></td>
+                            <td><?php echo $row->status; ?></td>
+
+                            <td><?php echo date('d/m/Y h:i a',strtotime($row->start_date_time))  ; ?></td>
+                            <td><?php echo date('d/m/Y h:i a',strtotime($row->end_date_time))  ; ?> </td>
+
+                            <td><?php echo $row->after_discount_amount; ?></td>
                             <td><?php echo $row->user_fullname; ?></td>
                             <td><?php echo $row->user_email; ?></td>
-                            <td><?php echo $row->user_mobile_no_1; ?></td>
+                           
 
                             <td><?php echo $row->no_of_adults; ?></td>
                             <td><?php echo $row->no_of_children; ?></td>
-                            <td><?php echo $row->start_date_time; ?></td>
-                            <td><?php echo $row->end_date_time; ?></td>
-                            <td><?php echo $row->amount; ?></td>
 
-                            <td><?php echo $row->status; ?></td>
+                            <td><?php echo date('d/m/Y h:i a',strtotime($row->created_at))  ; ?></td>
+                            <!-- <td></td> -->
+                            
+                            
+
+                            
 
                           </tr>
                         <?php $i++;
@@ -127,21 +134,7 @@
                       <?php } ?>
 
                     </tbody>
-                    <tfoot>
-                      <th class="col-xs-1">No.</th>
-                      <th class="col-xs-2">Room Type</th>
-                      <th class="col-xs-2">Full Name</th>
-                      <th class="col-xs-1">Email</th>
-                      <th class="col-xs-1">Mobile No</th>
-
-                      <th class="col-xs-1">No of Adults</th>
-                      <th class="col-xs-1">No of Children</th>
-                      <th class="col-xs-1">Start Date</th>
-                      <th class="col-xs-1">End Date</th>
-                      <th class="col-xs-1">Amount</th>
-
-                      <th class="col-xs-1">Payment Status</th>
-                    </tfoot>
+                    
                   </table>
 
                 </div><!-- /.box-body -->

@@ -13,6 +13,7 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+        <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_room_type_index');?></h3>
           <h1>
             Room Types Management
 
@@ -67,13 +68,7 @@
                       <?php } ?>
 
                     </tbody>
-                    <tfoot>
-                      <th class="col-xs-1">No.</th>
- 
-                      <th class="col-xs-1">Image</th>
-
-                      <th class="col-xs-2">Action</th>
-                    </tfoot>
+                    
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

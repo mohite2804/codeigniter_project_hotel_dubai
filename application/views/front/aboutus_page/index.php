@@ -52,18 +52,18 @@
             <i class="fa fa-wifi"></i>
             <p> Wifi</p>
           </li>
-          <li>
+          <!-- <li>
             <i class="fa fa-bath"></i>
             <p> Sauna</p>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <i class="fa fa-coffee"></i>
             <p> Coffee Maker</p>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <i class="fa fa-glass"></i>
             <p> Mini Bar</p>
-          </li>
+          </li> -->
           <li>
             <i class="fa fa-snowflake-o"></i>
             <p> Air Conditioner</p>
@@ -76,4 +76,4 @@
   </div>
 </section>
 
-<?php $this->load->view('front/newsletter_page/index'); ?>
+<?php //$this->load->view('front/newsletter_page/index'); ?>

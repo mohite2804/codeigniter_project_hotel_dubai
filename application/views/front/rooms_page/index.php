@@ -6,13 +6,15 @@
         <div id="bannercarousel" class="carousel slide carousel-fade" data-ride="carousel">
           <div class="carousel-inner img_inner">
 
-            <?php if (count($slider_images) > 0) { ?>
-              <?php foreach ($slider_images as $key => $row) { ?>
+            <?php if (count($slider_imagesmain) > 0) { ?>
+              <?php foreach ($slider_imagesmain as $key => $row) { ?>
                 <div class="carousel-item <?php echo ($key === 0) ? 'active' : '' ?>">
                   <img class="d-block img-fluid w-100" src="<?php echo base_url() . FRONT_CSS_JS; ?><?php echo $row->image; ?>" alt="<?php echo $key . ' ' . $row->image; ?>">
                 </div>
               <?php } ?>
             <?php } ?>
+
+            
 
 
           </div>
@@ -48,18 +50,18 @@
             <i class="fa fa-wifi"></i>
             <p> Wifi</p>
           </li>
-          <li>
+          <!-- <li>
             <i class="fa fa-bath"></i>
             <p> Sauna</p>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <i class="fa fa-coffee"></i>
             <p> Coffee Maker</p>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <i class="fa fa-glass"></i>
             <p> Mini Bar</p>
-          </li>
+          </li> -->
           <li>
             <i class="fa fa-snowflake-o"></i>
             <p> Air Conditioner</p>
@@ -99,12 +101,19 @@
 
                 <div class="col-lg-4 col-md-12 col-12 col-xl-4 all <?php echo 'filter_'.$row->room_type_id; ?>">
                   <div class="bx_content_filter">
-                    <div class="img_box">
-                      <img src="<?php echo base_url() . FRONT_CSS_JS; ?><?php echo $row->image; ?>" class="img-fluid d-block mx-auto">
+                    <div class="img_box" style="background-image: url(<?php echo base_url() . FRONT_CSS_JS; ?><?php echo $row->image; ?>);" >
+                     
                     </div>
                     <div class="img_content">
-                      <p><?php echo $row->room_type_name; ?></p>
-                      <a href="">Book Now</a>
+                      <p><?php echo $row->name; ?></p>
+                      <!-- <a href="">Book Now</a> -->
+
+                      <?php if ($this->session->userdata('user_session')) { ?>
+                          <a href="<?php echo base_url().'product/'.$row->id; ?>">Book Now</a>
+                      <?php }else{?>
+                          <a  href="<?php echo base_url() . 'login'; ?>">Book Now</a>
+                      <?php }?>
+
                     </div>
                   </div>
                 </div>
@@ -129,4 +138,4 @@
 
 
 
-<?php $this->load->view('front/newsletter_page/index'); ?>
+<?php //$this->load->view('front/newsletter_page/index'); ?>

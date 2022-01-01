@@ -98,7 +98,7 @@ $db['default'] = array(
 
 $db['live'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => '104.131.109.233',
 	'username' => 'httpsitarahotela_hotel',
 	'password' => 'pn]9qW,@0Zua',
 	'database' => 'httpsitarahotela_hotel',

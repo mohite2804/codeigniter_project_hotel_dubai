@@ -7,39 +7,118 @@ class Main_Model extends CI_Model {
         }
 		
 
+	function getServices($slug){
+		return $this->db->select('services.*,service_types.name as service_type_name,service_types.slug as service_type_slug')
+		->from('services')
+		->join('service_types','service_types.id = services.service_type_id')
+		->where('services.is_deleted', '0')
+		->where('service_types.is_deleted', '0')
+		->where('service_types.slug', $slug)
+		->order_by("services.id", "desc")
+		
+		->get()->result();
+
+	}
+
+	function getServiceById($id){
+		return $this->db->select('services.*,service_types.name as service_type_name,service_types.slug as service_type_slug')
+		->from('services')
+		->join('service_types','service_types.id = services.service_type_id')
+		->where('services.is_deleted', '0')
+		->where('services.is_deleted', '0')
+		->where('services.id', $id)
+		->order_by("services.id", "desc")		
+		->get()->row();
+
+		
+	}
+
 	function getOrders($where = ""){
-		$sql = "select o.*,u.user_fullname,u.user_email,u.user_mobile_no_1,u.user_mobile_no_2,rt.name as room_type
+		$sql = "select o.*,u.user_fullname,u.user_email,u.user_mobile_no_1,u.user_mobile_no_2,rt.name as room_type,r.name as room_name
 		from orders o 
 		join users u on u.user_id = o.user_id
 		join rooms r on r.id = o.room_id
-		join room_types rt on rt.id = r.room_type_id";
+		join room_types rt on rt.id = r.room_type_id
+		order by o.id desc";
 
 		if($where){
 			$sql .= " where $where";
 		}
 		
+	
+		$query = $this->db->query($sql);
+		return $query->result();
 		
-		 $this->db->query($sql);
 	}
 
 	function getRoomTypes(){
-		return $this->db->from('room_types')->get()->result();
+		return $this->db->from('room_types')->where('is_deleted','0')->get()->result();
+	}
+
+	function getRooms(){
+		return $this->db
+		->select('rooms.*,room_types.name as room_type')
+		->from('rooms')
+		->join('room_types','room_types.id  = rooms.room_type_id')
+		->where('rooms.is_deleted','0')
+		->get()->result();
 	}
 
 	function getRoomTypesById($id){
 		return $this->db->from('room_types')->where('id',$id)->get()->row();
 	}
 
+	function getRoomsById($id){
+		return $this->db->from('rooms')->where('id',$id)->get()->row();
+	}
+
 	function getRoomTypesImagesById($id){
 		return $this->db->from('slider_images')->where('room_type_id',$id)->get()->result();
 	}
 
-	
+	function getRoomImagesById($id){
+		return $this->db->from('slider_images')->where('room_type_id',$id)->get()->result();
+	}
 
+	function getRoomServices(){
+		return $this->db
+		->select('services.*,service_types.name as service_type_name')
+		->from('services')
+		->join('service_types','service_types.id  = services.service_type_id')
+		->where('services.is_deleted',0)
+		->where('service_types.is_deleted',0)
+		
+		
+		->get()->result();
+	}
+
+	
+	function deleteService($id){
+		$this->db->set('is_deleted', '1');
+		$this->db->where('id', $id);
+		$this->db->update('services'); 
+		if($this->db->affected_rows())
+			return true;
+		else
+			return false;
+		
+		
+	}
 		
 	function deleteRoomType($id){
+		$this->db->set('is_deleted', '1');
+		$this->db->where('id', $id);
+		$this->db->update('room_types'); 
+		if($this->db->affected_rows())
+			return true;
+		else
+			return false;	
+	
+	}
+
+	function deleteRoom($id){
 		$this->db->delete('slider_images', array('room_type_id' => $id));
-		$this->db->delete('room_types', array('id' => $id));
+		$this->db->delete('rooms', array('id' => $id));
 		
 		if($this->db->affected_rows())
 			return true;

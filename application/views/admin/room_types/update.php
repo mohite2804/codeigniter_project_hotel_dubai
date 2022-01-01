@@ -19,11 +19,12 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
+	<h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_room_type_update');?></h3>
 		<h1>
 			Room Type
 
 		</h1>
-		<a  style="float:right; margin-right: 23px;margin-top: -24px;font-size: 20px;"  href="<?php echo base_url()."Admin/roomTypes";?>"> Back</a>
+		<a style="float:right; margin-right: 23px;margin-top: -24px;font-size: 20px;" href="<?php echo base_url() . "Admin/roomTypes"; ?>"> Back</a>
 
 	</section>
 
@@ -41,7 +42,7 @@
 						<!-- form start -->
 
 						<form id="frm_punch_card_add_update" class="form-horizontal" method="post" enctype="multipart/form-data" action="">
-
+						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 							<div class="box-body">
 
 
@@ -55,32 +56,16 @@
 								</div>
 
 
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Images</label>
-									<div class="col-sm-10">
+							
 
-										<input name="image[]" type="file" multiple="multiple">
-										<br>
-										<?php if (!empty($images)) { ?>
-											<?php foreach ($images as $row) { ?>
-												<span id="image_delete_<?php echo $row->id; ?>">
-													<image style="width: 100px; heigh:100px" src="<?php echo base_url() . FRONT_CSS_JS; ?><?php echo $row->image; ?>" />
-													<span style="cursor:pointer" onclick="deleteRoomTypeImage(<?php echo $row->id; ?>)"><i class="glyphicon glyphicon-remove"></i></span>
-												</span>
-											<?php } ?>
-										<?php } ?>
-									</div>
-								</div>
-
-								
 
 
 
 							</div><!-- /.box-body -->
 							<div class="box-footer">
 								<input name="room_type_id" value="<?php echo $result->id; ?>" type="hidden">
-							
-							
+
+
 								<button type="submit" value="submit" name="submit" class="btn btn-info pull-right">Save</button>
 							</div>
 						</form>

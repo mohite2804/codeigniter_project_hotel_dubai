@@ -19,6 +19,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
+  <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_gallery_index');?></h3>
     <h1>
       Gallery
 
@@ -41,7 +42,8 @@
             <!-- form start -->
 
             <form id="frm_punch_card_add_update" class="form-horizontal" method="post" enctype="multipart/form-data" action="">
-
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+            <input type="hidden" class="csrf_update_gallery" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>"><br>   
               <div class="box-body">
 
 

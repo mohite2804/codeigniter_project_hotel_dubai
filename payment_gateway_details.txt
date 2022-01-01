@@ -1,0 +1,97 @@
+https://login.ccavenue.ae/jsp/merchant/merchantLogin.jsp
+user id - off_48750
+password- nxHs7UFuP62:B-a
+AED
+
+Merchant_id:	48750
+Access_code:	AVDM04IL19BH89MDHB
+Enc_key:	BA717F6DFF02A6ED886AAF2275B39F8B
+
+
+Hi,
+
+Merchant_id:    48750
+
+How to refund amount to client.
+
+Please Provide Refund API detais.
+
+Thanks and Regards
+Mohite
+
+Please find the below API keys for UAT, & kindly pass INR in currency
+
+URL:http://combuild.in
+access_code:    AVBY04CB47AY49YBYA     
+Working key:    5C4D606CC030EED3A4884C7079807C53
+ 
+URL:https://sitarahotelapartment.com
+access_code:    AVIK04IL09CA00KIAC     
+Working key:    F27A519F332FE588317FDC3377C69120
+
+
+
+
+-- room not available
+-- online book kele cheout aaj hote tyache v tyani checkout nh kele mg
+
+-- Refund issue
+-- date format
+
+-- room per adult or no of adult.
+
+-- refrance side check
+-- Room children kadhayche tr calculation ks kraych
+-- Rate chang for for all
+
+
+-- Email template for room booking
+-- 
+
+
+
+
+
+Room Occupancy
+
+Single or Double occupancy on room basis only is same rate.
+
+Additional adult rate increased by 150 net per night
+
+02 Kids below 10 years go free.
+
+Extra beds charged at 150/- net per night
+
+ 
+
+Breakfast Charges
+
+Breakfast per adult 50/- net
+
+Child breakfast 6-10 years 25/- net
+
+Child below 6 dine free 
+
+ Maximum Occupancy is 03 adults in a room with an extra bed.
+
+
+
+-- chid breakfast change rate from admin
+-- Adult Breakfast change rate from admin
+-- adult rate 150 change from admin.
+-- breakfast charges change change from admin
+-- child sathi kay rate
+
+
+-- if add extra lunch dinner add or extra service add keli tr ks
+-- age and quantity wise calculation
+-- if checkout chya aadhi room sodli tr kay
+-- if checkout ntr room sodli tr kay
+-- Refund amount pay to admin calculation
+--  Gst Lavlela nhye
+
+
+F:\projects\code\mypolicynow_rewamp\api\app\Http\Controllers\Myaccount\SoldPolicy.php
+function name : exportPolicyData
+
+$where = " WHERE pddm.policy_no != '' AND pddm.user_id IN($pos_ids) ";
