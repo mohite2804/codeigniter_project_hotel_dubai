@@ -74,9 +74,7 @@ class Database_library {
 			return false;
 	}
 	
-	//$upload_path = "./uploads/products/";
-	//$image_title = "user_album_";
-	//$image_file = "user_album_images";
+	
 	function multipleImageUpload($upload_path,$image_file,$image_title){
 		
 		$config = array(
@@ -180,7 +178,8 @@ class Database_library {
 		$this->CI->email->set_mailtype("html");
 		
 		$this->CI->email->from($from, $name);
-		$this->CI->email->to($to);		
+		$this->CI->email->to($to);	
+		$this->email->cc('fo@sitarahotelapartment.com');	
 		$this->CI->email->subject($subject);
 		$this->CI->email->message($message);
 		try {

@@ -61,16 +61,20 @@
             </li>
 
 
-            <!-- <li class="treeview">
-              <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
+            <li class="<?php echo ($this->uri->segment(2) == 'extraSetting') ? 'active' : '' ?>">
+              <a href="<?php echo base_url() . 'Admin/extraSetting'; ?>">
+                <i class="fa fa-dashboard"></i> <span>Extra Setting</span> </i>
               </a>
-              <ul class="treeview-menu" style="display: none;">
-                <li class="active">
-                    <a href="<?php echo base_url() . 'Admin/getOrders'; ?>"><i class="fa fa-circle-o"></i>Orders</a></li>
-                
-              </ul>
-            </li> -->
+            </li>
+
+            <li class="<?php echo ($this->uri->segment(2) == 'roomRateSetting') ? 'active' : '' ?>">
+              <a href="<?php echo base_url() . 'Admin/roomRateSetting'; ?>">
+                <i class="fa fa-dashboard"></i> <span>Room Rate Setting</span> </i>
+              </a>
+            </li>
+
+
+           
 
           
             

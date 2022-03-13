@@ -8,6 +8,14 @@ Access_code:	AVDM04IL19BH89MDHB
 Enc_key:	BA717F6DFF02A6ED886AAF2275B39F8B
 
 
+
+https://sitarahotelapartment.com:2083/
+user name : - httpsitarahotela
+password :- WO5sCk}Ip?+m
+new password :- Slc!,1~v?o_x
+
+
+
 Hi,
 
 Merchant_id:    48750
@@ -95,3 +103,80 @@ F:\projects\code\mypolicynow_rewamp\api\app\Http\Controllers\Myaccount\SoldPolic
 function name : exportPolicyData
 
 $where = " WHERE pddm.policy_no != '' AND pddm.user_id IN($pos_ids) ";
+
+$working_key = 'BA717F6DFF02A6ED886AAF2275B39F8B'; //Shared by CCAVENUES
+
+
+10
+
+https://docs.nimbbl.tech/#/php-kit
+
+https://laraveldaily.com/how-to-use-external-classes-and-php-files-in-laravel-controller/
+
+
+
+
+
+
+
+
+Hi,
+
+
+
+Please try to payment from your side
+    Link: https://sitarahotelapartment.com/bookRoom/9
+
+    status_message":"AUTHENTICATION_NOT_AVAILABLE"
+
+
+    Marchant ID = "48750";
+    Checkout URL = "https://secure.ccavenue.ae/transaction/transaction.do?command=initiateTransaction";
+
+
+    I have attach  Failure Analysis Report.
+   
+
+    {"order_id":"23","tracking_id":"111024225573","bank_ref_no":"null","order_status":"Failure","failure_message":"","payment_mode":"Debit Card","card_name":"MasterCard Debit Card","status_code":"null","status_message":"AUTHENTICATION_NOT_AVAILABLE","currency
+
+
+    {"order_id":"27","tracking_id":"111024309053","bank_ref_no":"null","order_status":"Failure","failure_message":"","payment_mode":"Debit Card","card_name":"MasterCard Debit Card","status_code":"null","status_message":"AUTHENTICATION_NOT_AVAILABLE","currency
+
+
+
+Thanks and Regards
+Mohite
+
+
+
+murchantunderwriting@ccaveny.com
+
+sevvi
+
+Murchant Id
+URL:http://www.sitarahotelapartment.com
+My simple 
+
+
+merchantunderwriting@ccaveny.com
+
+
+Dear Team
+
+    Merchant_id:    48750
+    My Server 
+
+
+mysimplestore.com
+
+
+Thanks and Reagars
+
+
+https://minesweb.wordpress.com/
+
+https://www.milesweb.in/
+
+
+9028953146
+

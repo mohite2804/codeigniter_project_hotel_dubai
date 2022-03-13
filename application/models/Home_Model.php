@@ -9,10 +9,487 @@ class Home_Model extends CI_Model {
         }
 
 
+	function Cronjob(){
+		try {
+			
+			$this->Main_Model->cronRunOrNot();
+			$this->Main_Model->updateRoomBooking();
+			$this->Main_Model->updateRoomRateDaily();
+		} catch (\Exception $e) {
+			echo "<pre>"; print_r($e); exit;
+		}
+	}
+
+	public function buynow($id,$data){
+		
+			$this->form_validation->set_rules('room_no_of_adult', 'Number Of Adult', 'required');
+			$this->form_validation->set_rules('room_no_of_children', 'Number of Children', 'required');
+
+			$this->form_validation->set_rules('no_of_room', 'Number of Room', 'required');
+			$this->form_validation->set_rules('room_start_date', 'Check In Date', 'required');
+			$this->form_validation->set_rules('room_end_date', 'Check Out Date', 'required');
+			
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->session->set_flashdata('err_msg', "<div style='color:red' >" . validation_errors() . "</div>");
+				redirect('bookRoom/' . $this->input->post('id'));
+			}
+			
+			
+
+			$merchant_data = '';	
+
+			// --------------------Demo details for payment gateway  --------------------------
+			// $merchant_id = "48750";
+			// $working_key = 'F27A519F332FE588317FDC3377C69120'; //Shared by CCAVENUES
+			// $access_code = 'AVIK04IL09CA00KIAC'; //Shared by CCAVENUES
+			// $currency = "INR";
+
+			// --------------------Live details for payment gateway  --------------------------
+			$merchant_id = "48750";
+			$access_code = 'AVDM04IL19BH89MDHB'; //Shared by CCAVENUES			
+			$working_key = 'BA717F6DFF02A6ED886AAF2275B39F8B'; //Shared by CCAVENUES
+			$currency = "AED";
+
+
+			//echo "<pre>"; print_r($data); exit;
+			
+			$total_amount = $data['result'][0]->total_amount;
+			$save_amount = $data['result'][0]->save_amount;
+
+			
+
+			$room_no_of_adult = $this->input->post('room_no_of_adult');
+			$room_no_of_children = $this->input->post('room_no_of_children');
+			$no_of_room = $this->input->post('no_of_room');
+
+			$start_date_time = $this->input->post('room_start_date');
+			$end_date_time = $this->input->post('room_end_date');
+			
+			$start_date_time = date("Y-m-d", strtotime($start_date_time));
+			$end_date_time = date("Y-m-d", strtotime($end_date_time));
+
+			$date1 = date_create($start_date_time);
+			$date2 = date_create($end_date_time);
+			$diff = date_diff($date1, $date2);
+			$no_of_days = $diff->days;
+			$data['selected_data']['no_of_days']  = $no_of_days;
+			
+
+			//$user_id = $this->session->userdata('user_session')['logged_in'];
+			$user_id = 1;
+			
+
+			$where = array('r.id' => $id);
+			$result = $this->Home_Model->getProducts($where);
+
+			
+
+			if (!empty($result)) {
+				
+				if ($result[0]->is_free != 1) {
+					$this->session->set_flashdata('suc_msg', "<span style='color:red' >This room is already occupied you can not book this room.</span>");
+					redirect('bookRoom/' . $id);
+				}
+
+	
+			
+
+				$result[0]->user_id = $user_id;
+				$result[0]->start_date_time = $start_date_time;
+				$result[0]->end_date_time = $end_date_time;
+				$result[0]->room_no_of_adult = $room_no_of_adult;
+				$result[0]->room_no_of_children = $room_no_of_children;
+				$result[0]->no_of_room = $no_of_room;
+				$result[0]->total_room_amount = $total_amount;
+				$result[0]->total_save_amount = $save_amount;
+				
+				$order_id = $this->Home_Model->insertIntoOrder($result[0], $user_id);
+
+				//$total_amount = "0.01";
+				$payment_parameter = array(
+
+					'merchant_id' =>  $merchant_id,
+					'order_id' =>  $order_id,
+					'amount' =>  $total_amount,
+
+					'currency' =>  $currency,
+					'redirect_url' =>  "https://sitarahotelapartment.com/getPaymentGatewayResponse",
+					'cancel_url' =>  "https://sitarahotelapartment.com",
+					'language' =>  "EN",
+					'merchant_param1' => $user_id,
+					'merchant_param2' =>   $id,
+					'merchant_param3' =>  "EN",
+					'mobile_number' => ''
+
+				);
+
+				
+
+				if ($payment_parameter) {
+					foreach ($payment_parameter as $key => $value) {
+						$merchant_data .= $key . '=' . urlencode($value) . '&';
+					}
+				}
+				$this->load->library('someclass');
+				
+				
+				$encrypted_data = $this->someclass->encrypt($merchant_data, $working_key);
+				//echo "<pre>"; print_r($merchant_data); exit;
+				
+
+				//$check_url = "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+				$check_url = "https://secure.ccavenue.ae/transaction/transaction.do?command=initiateTransaction";
+
+				
+				?>
+
+				
+				<form method="post" name="redirect" action="<?php echo $check_url; ?>">
+					<?php
+					echo "<input type=hidden name=encRequest value=$encrypted_data>";
+					echo "<input type=hidden name=access_code value=$access_code>";
+					?>
+				</form>
+				<script language='javascript'>
+					document.redirect.submit();
+				</script>
+				<?php
+
+			}
+		
+	}
+	
+
+		
+	function setVariablesFromSession(){
+		$room_type = $this->session->userdata('room_type');
+		$no_of_room = $this->session->userdata('no_of_room');
+		$room_start_date = $this->session->userdata('room_start_date');
+		$room_end_date = $this->session->userdata('room_end_date');
+		$room_no_of_adult = $this->session->userdata('room_no_of_adult');
+		$room_no_of_children = $this->session->userdata('room_no_of_children');
+
+
+		if(!$room_start_date){
+
+			$room_type = $this->session->userdata('room_type');
+			$no_of_room = 1;
+			$room_start_date = date("d-m-Y", strtotime($d . " +1 days")); // date('d/m/Y');
+			$room_end_date = date("d-m-Y", strtotime($d . " +2 days"));
+			$room_no_of_adult = 1;
+			$room_no_of_children = 0;
+		
+		}
+		
+
+		$data['selected_data']['room_type']  = $room_type;
+		$data['selected_data']['no_of_room']  = $no_of_room;
+		$data['selected_data']['room_start_date']  = $room_start_date;
+		$data['selected_data']['room_end_date']  = $room_end_date;
+		$data['selected_data']['room_no_of_adult']  = $room_no_of_adult;
+		$data['selected_data']['room_no_of_children']  = $room_no_of_children;
+
+		$data['selected_data']['multiple_child']  = $room_no_of_children;
+
+		return $data['selected_data'];
+	}
+
+	function setVariables(){
+
+		$room_type = $data['selected_data']['room_type'] = $this->input->post('room_type');
+		$no_of_room = $data['selected_data']['no_of_room'] = $this->input->post('no_of_room');
+		$room_start_date = $data['selected_data']['room_start_date'] = $this->input->post('room_start_date');
+		$room_end_date = $data['selected_data']['room_end_date'] = $this->input->post('room_end_date');
+		$room_no_of_adult = $data['selected_data']['room_no_of_adult'] = $this->input->post('room_no_of_adult');
+		$room_no_of_children = $data['selected_data']['room_no_of_children'] = $this->input->post('room_no_of_children');
+		
+		if(!$this->input->post('no_of_room')){
+			$data['selected_data']['no_of_room']  = '1';
+		}
+
+		if(!$this->input->post('room_start_date')){
+			$data['selected_data']['room_start_date']  = date("d-m-Y", strtotime($d . " +1 days")); // date('d/m/Y');;
+		}
+
+		if(!$this->input->post('room_end_date')){
+			$data['selected_data']['room_end_date']  = date("d-m-Y", strtotime($d . " +2 days"));;
+		}
+
+		if(!$this->input->post('room_no_of_adult')){
+			$data['selected_data']['room_no_of_adult']  = '1';
+		}
+
+		if(!$this->input->post('room_no_of_children')){
+			$data['selected_data']['room_no_of_children']  = '0';
+		}
+
+		
+
+		$this->form_validation->set_rules('room_type', 'Room Type', 'required');
+		$this->form_validation->set_rules('no_of_room', 'Room', 'required');
+		$this->form_validation->set_rules('room_start_date', 'Start Date', 'required');
+		$this->form_validation->set_rules('room_end_date', 'End Date', 'required');
+		$this->form_validation->set_rules('room_no_of_adult', 'Number of Adult', 'required');
+		$this->form_validation->set_rules('room_no_of_children', 'Number of Children', 'required');
+
+		//echo "<pre>"; print_r($this->input->post()); exit;
+		
+		if (!$this->form_validation->run() == FALSE) {
+			$room_type = $this->input->post('room_type');
+			$no_of_room = $this->input->post('no_of_room');
+			$room_start_date = $this->input->post('room_start_date');
+			$room_end_date = $this->input->post('room_end_date');
+			$room_no_of_adult = $this->input->post('room_no_of_adult');
+			$room_no_of_children = $this->input->post('room_no_of_children');
+
+			
+			$child_age = $this->input->post('child_age');
+			
+
+			$you_want_extra_bed = $this->input->post('you_want_extra_bed');
+			$you_want_breakfast = $this->input->post('you_want_breakfast');
+			
+			$data['selected_data']['multiple_child']  = $child_age;
+
+			$extra_bed_count = 0;
+			if($you_want_extra_bed){
+				$extra_bed_count = $this->input->post('extra_bed_count');				
+			}
+
+			$child_age_count = 0;
+			if($you_want_breakfast){
+				$child_age = $this->input->post('child_age');	
+				if($child_age){
+					foreach($child_age as $row_age){
+						if($row_age){
+							$child_age_count ++;
+						}
+					}
+				}			
+			}
+			
+			
+
+			$data['selected_data']['room_type']  = $room_type;
+			$data['selected_data']['no_of_room']  = $no_of_room;
+			$data['selected_data']['room_start_date']  = $room_start_date;
+			$data['selected_data']['room_end_date']  = $room_end_date;
+			$data['selected_data']['room_no_of_adult']  = $room_no_of_adult;
+			$data['selected_data']['room_no_of_children']  = $room_no_of_children;
+
+			$data['selected_data']['you_want_extra_bed']  = $you_want_extra_bed;
+			$data['selected_data']['extra_bed_count']  = $extra_bed_count;
+
+			$data['selected_data']['you_want_breakfast']  = $you_want_breakfast;
+			$data['selected_data']['child_age_count']  = $child_age_count;
+
+			$this->session->set_userdata($data['selected_data']);
+			
+
+		}else{
+			echo validation_errors();
+		}
+		return $data['selected_data'];
+	}
+
+	function extraSetting(){
+		return $result =  $this->db->from('extra_setting')->where('id',1)->get()->row();
+	}
+
+
+	function getRoomAmountFromRoomRate($date,$row){
+		$selected_amount = 0;
+		$year = (int) date('Y',strtotime($date));
+		$month = (int) date('m',strtotime($date));;
+		$day = (int) date('d',strtotime($date));;
+		$selected_day = "day_".$day;
+		$room_type_id = $row->room_type_id;
+		
+		$result =  $this->db
+		->select($selected_day)
+		->from('room_rates')
+		->join('room_types', 'room_types.id = room_rates.room_type_id')
+		->where('room_rates.year', $year)
+		->where('room_rates.month', $month)
+		->where('room_rates.room_type_id', $room_type_id)
+		->order_by("room_rates.id", "desc")
+		->get()->row();
+
+		if($result){
+			return $selected_amount = $result->$selected_day; 
+		}
+		return $selected_amount;
+	}
+
+
+	function setAmountAndDiscount($date1,$row,$room_amount_from_room_rate,$no_of_room){
+						
+			$room_amount_from_room_rate = $this->Home_Model->getRoomAmountFromRoomRate($date1,$row);
+			$total_amount =   $room_amount_from_room_rate;							
+			$save_amount =  ($row->save_percentage / 100) * (float)$total_amount;
+			
+			$after_discount_amount = (float)$total_amount - (float)$save_amount;
+
+			$row->save_amount = $save_amount  * $no_of_room;
+			$row->amount = $after_discount_amount  * $no_of_room;
+			$row->total_amount =   $after_discount_amount  * $no_of_room;	
+		
+		
+		return $row;
+	}
+
+	function bookRoom($id,$data){
+	
+		
+		$no_of_room = $data['selected_data']['no_of_room'];
+		$room_no_of_adult = $data['selected_data']['room_no_of_adult'];
+		$room_no_of_children = $data['selected_data']['room_no_of_children'];
+		$room_start_date = $data['selected_data']['room_start_date'];
+		$room_end_date = $data['selected_data']['room_end_date'];
+
+		$extra_bed_count = $data['selected_data']['extra_bed_count'];
+		$child_age_count = $data['selected_data']['child_age_count'];
+
+		$you_want_breakfast = $data['selected_data']['you_want_breakfast'];
+		$you_want_extra_bed = $data['selected_data']['you_want_extra_bed'];
+
+		
+				
+		$date1 = date("Y-m-d",strtotime($room_start_date));
+		$date2 = date("Y-m-d",strtotime($room_end_date));
+
+		$diff = abs(strtotime($date2) - strtotime($date1));
+		$years = floor($diff / (365*60*60*24));
+		$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+		$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+		
+		$extra_setting  = $this->Home_Model->extraSetting();	
+				
+		$where = array('r.id' => $id);
+		$new_result  = $this->Home_Model->getProducts($where);			
+		if($new_result){
+			foreach($new_result as $row){
+				$row = $this->Home_Model->setAmountAndDiscount($date1,$row,$row->after_discount_amount,$no_of_room);
+
+				
+							
+
+				if($room_no_of_adult > $no_of_room){
+					$adult_no = $room_no_of_adult - $no_of_room;
+					$adult_amount = ($adult_no * $extra_setting->extra_adult_amount);					
+					$row->total_amount =  $row->total_amount +  $adult_amount;					
+				}
+
+				if($days){
+					$adult_no = $room_no_of_adult - $no_of_room;
+					$adult_amount = ($adult_no * $extra_setting->extra_adult_amount);					
+					$row->total_amount =  $row->total_amount *  $days;					
+				}
+
+				if($extra_bed_count){				
+					$extra_bed_amount = ($extra_bed_count * $extra_setting->extra_bed_amount);					
+					$row->total_amount =  $row->total_amount +  $extra_bed_amount;					
+				}
+
+				
+				if($you_want_breakfast){
+					$adult_no = $room_no_of_adult;
+					$adult_breakfast_amount = ($adult_no * $extra_setting->extra_adult_breakfast_amount);					
+					$row->total_amount =  $row->total_amount +  $adult_breakfast_amount;	
+					
+					
+					$child_breakfast_amount = ($child_age_count * $extra_setting->extra_child_breakfast_amount );					
+					$row->total_amount =  $row->total_amount +  $child_breakfast_amount;
+				}
+			
+
+				//$data['selected_data']['room_type']  = $row->room_type_id;
+			}
+		}
+		$data['result'] = $new_result;
+		
+		return $data;
+	}
+
+	function getOrderStausByRoomId($room_id,$login_user_id){
+		return $result =  $this->db->select('o.*')
+		->from('orders as o')			
+		->join('rooms as r','r.id = o.room_id')		
+		->where('o.user_id', $login_user_id)
+		->where('r.id', $room_id)
+		->order_by("o.id", "desc")
+		->get()->row();
+	}
+
+	function cancelBooking($room_id,$login_user_id){
+		$result =  $this->db->select('o.*')
+		->from('orders as o')			
+		->join('rooms as r','r.id = o.room_id')		
+		->where('o.user_id', $login_user_id)
+		->where('r.id', $room_id)
+		->get()->row();
+
+		if($result){
+			try {
+				$this->db->set('status','Request for Cancellation')
+				->where('o.user_id', $login_user_id)
+				->where('o.room_id', $room_id)
+				->update('orders as o'); 
+				return true;
+			} catch (Exception $e) {
+				return false;
+			}
+		}
+			
+		
+	}
+
+	function createUserFromPaymentResponse($payment_gateway_response){
+		$insert_data = array(
+			'user_fullname' => $payment_gateway_response['billing_name'],   
+			'user_email' => $payment_gateway_response['billing_email'],
+			'user_mobile_no_1' => $payment_gateway_response['billing_tel'],
+			'user_address' => $payment_gateway_response['billing_address'],
+			'user_city' => $payment_gateway_response['billing_city'],
+			'user_state' => $payment_gateway_response['billing_state'],
+			'user_pincode' => $payment_gateway_response['billing_zip'],
+			'user_country' => $payment_gateway_response['billing_country'],	
+			'user_created_at' => date('Y-m-d H:i:s'),
+		);
+		  
+		if($this->db->insert('users' , $insert_data))
+			return $this->db->insert_id();
+		else  
+			return 0;
+	}
+
+	function sendMailToCustomer($payment_gateway_response,$order_datails){
+		$room_type = 	 $this->db->where('id',$order_datails->room_id)->get('rooms')->row();
+		
+
+		$from = "fo@sitarahotelapartment.com";
+		$to = $payment_gateway_response['billing_email'];
+		$sub = "Room Book";		
+		$comp_name =  "Sitara Hotel Apartment";
+
+		$email_data['payment_gateway_response'] = $payment_gateway_response;
+		$email_data['order_datails'] = $order_datails;
+		$email_data['room_type'] = $room_type->name;
+		
+		$msg  = $this->load->view('front/email_template/send_mail_to_customer', $email_data,true);
+
+		$this->load->library('database_library');
+		$is_send = $this->database_library->sendEmail($from,$to,$sub,$msg,$comp_name);
+	}
+
 	function getPaymentGatewayResponse($payment_gateway_response){
 		$insert_into_payment = array();
 		if(!empty($payment_gateway_response)){
+
+			//echo "<pre>"; print_r($payment_gateway_response);  exit;
 			$insert_into_payment['order_id'] = $payment_gateway_response['order_id'];
+			$insert_into_payment['room_id'] = $payment_gateway_response['merchant_param2'];
 			$insert_into_payment['tracking_id'] = $payment_gateway_response['tracking_id'];
 			$insert_into_payment['bank_ref_no'] = $payment_gateway_response['bank_ref_no'];
 			$insert_into_payment['order_status'] = $payment_gateway_response['order_status'];
@@ -22,24 +499,49 @@ class Home_Model extends CI_Model {
 			$insert_into_payment['trans_date'] = $payment_gateway_response['trans_date'];
 			$insert_into_payment['created_at'] = date('Y-m-d H:i:s');
 
+			
+
 			$insert_into_payment['payment_gateway_response'] = json_encode($payment_gateway_response) ;
 
 			if($this->db->insert('payment_details' , $insert_into_payment)){
+
+				$user_id = $this->createUserFromPaymentResponse($payment_gateway_response);
+
+				$this->db->set('user_id', $user_id);
+				$this->db->where('id', $payment_gateway_response['order_id']);
+				$this->db->update('orders');
+
 				$room_id = $payment_gateway_response['merchant_param2'];	
 				$order_id = $payment_gateway_response['order_id'];		
-				//echo "<pre>"; print_r($payment_gateway_response); exit;
+				
 
-				if(trim($payment_gateway_response['order_status'])  == 'Success'){					
+				if(trim($payment_gateway_response['order_status'])  == 'Success'){		
 					
-					$this->db->set('is_free','0')->where('id', $room_id)->update('rooms'); 
-					$this->db->set('status','Booked')->where('id', $order_id)->update('orders'); 
+					$order_datails = 	 $this->db->where('id',$order_id)->get('orders')->row();
+					// echo "<pre>";
+					// print_r(date('Y-m-d')); 
+					// print_r(date('Y-m-d',strtotime($order_datails->start_date_time))); 
+					// exit;
+					
+					if($order_datails){
+						if(date('Y-m-d') == date('Y-m-d',strtotime($order_datails->start_date_time))){
+							$this->db->set('is_free','0')->where('id', $room_id)->update('rooms'); 
+							$this->db->set('status','Booked')->where('id', $order_id)->update('orders'); 
+						}
+					}
+
+					$is_send_mail = $this->sendMailToCustomer($payment_gateway_response,$order_datails);
+
+					
+					
 
 				}else{
 				
 					$this->db->set('is_free','1')->where('id', $room_id)->update('rooms'); 
 					$this->db->set('status','Fail')->where('id', $order_id)->update('orders'); 
+					return false;
 				}
-				return true;
+				return $user_id;
 			}else{
 				return false;
 			}
@@ -145,21 +647,21 @@ class Home_Model extends CI_Model {
 	}
 
 	function insertIntoOrder($data,$user_id){
-		//echo "<pre>"; print_r($data); exit;
+		
 		$insert_data = array(
-			'user_id' => $data->user_id,
+			'user_id' => $data->user_id,			
 			'room_id' => $data->id,
-			'no_of_children' => $data->no_of_children,
-			'no_of_adults' => $data->no_of_adults,
+			'no_of_children' => $data->room_no_of_children,
+			'no_of_adults' => $data->room_no_of_adult, 
 			'start_date_time' =>  date('Y-m-d 14:00:00',strtotime($data->start_date_time)) ,
 			'end_date_time' =>  date('Y-m-d 12:00:00',strtotime($data->end_date_time)) ,
 			'status' => 'pending',
-			'after_discount_amount' => $data->after_discount_amount,
-			'save_amount' => $data->save_amount,
+			'after_discount_amount' => $data->total_room_amount,
+			'save_amount' => $data->total_save_amount,
 			'save_percentage' => $data->save_percentage,
 			'created_at' => date('Y-m-d H:i:s'),
 		);
-		//echo "<pre>"; print_r($insert_data); exit;
+		
 		if($this->db->insert('orders' , $insert_data))
 			return $this->db->insert_id();
 		else	
@@ -264,22 +766,59 @@ class Home_Model extends CI_Model {
 
 	}
 
+
+	
+
 	function getProducts($where = array()){
+
+		if( count($where) > 0 ){
+			$this->db->where($where);
+		}
+		
+		$result =  $this->db->select('r.*,r.name as heading')
+		->from('rooms as r')
+		->join('room_types as rt','rt.id = r.room_type_id')				
+		->where('r.is_deleted', 0)
+		->where('rt.is_deleted', 0)	
+		->order_by('r.id')
+		->get()->result();
+
+		if($result){
+			foreach($result as $row){
+				if($row->room_amenities){
+					$row->amenities =  $this->db->select('title,image')->where_in('id', explode(',',$row->room_amenities))->get('services')->result();
+				}
+
+				if($row->room_highlight){
+					$row->highlights = $this->db->select('title,image')->where_in('id',explode(',',$row->room_highlight))->get('services')->result();
+				}
+
+				
+				$row->images = $this->db->select('title,image')->where('room_type_id',$row->id)->get('slider_images')->result();
+				
+			}
+		}
+
+		return $result;
+	}
+
+	function getDashboardProducts($where = array()){
 
 		if( count($where) > 0 ){
 			$this->db->where($where);
 		}
 		// s.image as room_image,
 
-		$result =  $this->db->select('r.*,r.name as heading')
+		$result =  $this->db->select('r.*,r.name as heading,o.id as order_id ,o.status as order_status ')
 		->from('rooms as r')
-		->join('room_types as rt','rt.id = r.room_type_id')		
+		->join('room_types as rt','rt.id = r.room_type_id')	
+		->join('orders as o','o.room_id = r.id')				
 		->where('r.is_deleted', 0)
 		->where('rt.is_deleted', 0)
 	
-		->order_by('r.id')
+		->order_by('o.id')
 		->get()->result();
-
+		//echo "<pre>"; print_r($this->db->last_query()); exit;
 		if($result){
 			foreach($result as $row){
 				if($row->room_amenities){

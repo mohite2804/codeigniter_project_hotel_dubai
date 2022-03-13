@@ -109,14 +109,14 @@
 								</div> -->
 
 
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Amount</label>
 									<div class="col-sm-10">
 
 										<input value="<?php echo $result->amount; ?>" class="form-control" name="amount" type="text">
 										<?php echo form_error('amount'); ?>
 									</div>
-								</div>
+								</div> -->
 
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Discount</label>

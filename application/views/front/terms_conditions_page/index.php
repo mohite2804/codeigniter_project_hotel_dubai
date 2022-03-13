@@ -41,4 +41,4 @@
     </div>
   </div>
 </section>
-<?php $this->load->view('front/newsletter_page/index'); ?>
+<?php //$this->load->view('front/newsletter_page/index'); ?>

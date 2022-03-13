@@ -28,7 +28,7 @@
         </ul>
       </div>
       <div class="col-12 col-lg-3 col-xl-3 col-md-12">
-        <h3>Follow us</h3>
+        <!-- <h3>Follow us</h3>
         <ul class="footer_link">
           <li><a data-toggle="tooltip" data-placement="top"  title="Under Construction" href="javascript:void(0)"><i class="icofont-facebook"></i> Facebook</a></li>
           <li><a data-toggle="tooltip" data-placement="top"  title="Under Construction" href="javascript:void(0)"><i class="icofont-twitter"></i> Twitter</a></li>
@@ -36,13 +36,15 @@
           <li><a data-toggle="tooltip" data-placement="top"  title="Under Construction" href="javascript:void(0)"><i class="icofont-youtube-play"></i> Youtube</a></li>
 
          
-        </ul>
+        </ul> -->
       </div>
 
     </div>
-  </div>
+  <!-- </div> -->
 </section>
 
+
+ 
 
 <div class="modal" id="feedback_modal" tabindex="-1" role="dialog">
 <?php echo form_open(base_url( '/feedback' ), array( 'id' => 'front_feedback' ));?>

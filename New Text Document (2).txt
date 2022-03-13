@@ -1,0 +1,53 @@
+Front (35 k) (English And Arabic)
+Days Pages
+2     Database Create
+2     Project Setup 
+1     Home
+1     About Us
+1     Contact Us
+1     Privacy Policy
+1     Terms and Conditions
+1     Booking Terms & Conditions
+2     Registration
+1     Login
+3     Room list (Free Cancellation,Breakfast Included,Breakfast & Lunch/Dinner Included)
+ 
+1     Hotel services 
+1     Book button
+
+1     Change password
+1     Varify mobile, email
+2     Notification on mail and mobile for hotel booking
+5     Online payment
+2     Cancelation
+1     Refund (after admin approval) 
+2     Refund conditons
+2     Filters (Room type,etc)
+
+
+
+Admin(25 k) (English)
+Days Pages
+2     Admin Setup
+1     Login
+2     Booking list
+2     Cancel booking list
+3     Add room
+2     Edit room
+1     Active active inactive room
+      
+1     Daily report
+1     Monthly report
+1     Year report
+1     Date wise report
+
+
+
+[8:43 pm, 15/06/2021] @vi: 60k = without payment gateway
+5k = payment gateway
+2k = sms gateway
+[8:43 pm, 15/06/2021] @vi: 1 year support
+
+
+
+

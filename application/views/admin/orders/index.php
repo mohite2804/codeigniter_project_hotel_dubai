@@ -8,7 +8,10 @@
 
       <script>
         $(function() {
-          $("#example1").DataTable();
+          //$("#example1").DataTable();
+          $('#example1').DataTable( {
+              "scrollX": true
+          });
 
         });
       </script>
@@ -25,6 +28,7 @@
 
         <!-- Main content -->
         <section class="content">
+        <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_order_index');?></h3>
           <div class="row">
             <div class="col-xs-12">
 
@@ -92,7 +96,7 @@
                         <th class="col-xs-1">No of Children</th>
 
                         <th class="col-xs-1">Booking Date And Time</th>
-                        <!-- <th class="col-xs-1">Action</th> -->
+                        <th class="col-xs-1">Action</th>
                         
 
                        
@@ -110,8 +114,8 @@
                             <td><?php echo $row->room_name; ?></td>
                             <td><?php echo $row->status; ?></td>
 
-                            <td><?php echo date('d/m/Y h:i a',strtotime($row->start_date_time))  ; ?></td>
-                            <td><?php echo date('d/m/Y h:i a',strtotime($row->end_date_time))  ; ?> </td>
+                            <td><?php echo date('d/m/Y',strtotime($row->start_date_time))  ; ?></td>
+                            <td><?php echo date('d/m/Y',strtotime($row->end_date_time))  ; ?> </td>
 
                             <td><?php echo $row->after_discount_amount; ?></td>
                             <td><?php echo $row->user_fullname; ?></td>
@@ -121,8 +125,16 @@
                             <td><?php echo $row->no_of_adults; ?></td>
                             <td><?php echo $row->no_of_children; ?></td>
 
-                            <td><?php echo date('d/m/Y h:i a',strtotime($row->created_at))  ; ?></td>
-                            <!-- <td></td> -->
+                            <td><?php echo date('d/m/Y',strtotime($row->created_at))  ; ?></td>
+                            <td>
+                              <?php if($row->status == 'Request for Cancellation'){ ?>
+                                <a href="<?php echo base_url().'admin/cancelApprove/'.$row->id; ?> " class="btn btn-sm btn-primary">Cancel Approve</a>
+                              <?php } ?>
+
+                              <?php if($row->status != 'Request for Cancellation' && $row->status != 'Completed'){ ?>
+                              <a href="<?php echo base_url().'admin/CheckoutRoom/'.$row->id; ?> " class="btn btn-sm btn-primary">Checkout Room</a>
+                              <?php } ?>
+                            </td>
                             
                             
 

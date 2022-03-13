@@ -12,7 +12,7 @@
                                 <div class="col">
                                     <p class="book_label">Room Type</p>
                                     <select name="room_type" class="js-example-basic-single " style="width: 100%">
-                                        <option value="">Select</option>
+                                        <!-- <option value="">Select</option> -->
                                         <?php if ($room_types) { ?>
                                             <?php foreach ($room_types as $row) { ?>
                                                 <option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
@@ -29,7 +29,7 @@
                                         <div class="childrenCount row  " id="Roomnumber">
                                             <div class="children_box">
                                                 <button type="button" class="minusCount" id="Rm_minus"><i class="icofont-minus"></i></button>
-                                                <input name="no_of_room" value="<?php if (!empty($selected_data['no_of_room'])) echo $selected_data['no_of_room'];
+                                                <input min="1" name="no_of_room" value="<?php if (!empty($selected_data['no_of_room'])) echo $selected_data['no_of_room'];
                                                                                 else echo '1'; ?>" name="no_of_room" autocomplete="off" type="text" class="adultInput">
                                                 <button type="button" class="addcount active" id="Rm_plus"><i class="icofont-plus"></i></button>
                                             </div>
@@ -68,7 +68,7 @@
                                             <div class="children_box">
                                                 <button type="button" class="minusCount" id="ch_minus"><i class="icofont-minus"></i></button>
                                                 <input name="room_no_of_children" type="text" class="adultInput" value="<?php if (!empty($selected_data['room_no_of_children'])) echo $selected_data['room_no_of_children'];
-                                                                                                                        else echo '1'; ?>">
+                                                                                                                        else echo '0'; ?>">
                                                 <button type="button" class="addcount active" id="ch_plus"><i class="icofont-plus"></i></button>
                                             </div>
                                         </div>
@@ -77,13 +77,7 @@
                                 <div class="col book_hotel_content">
                                     <!-- <a href="product.html" class="book_hotel">Book Now</a> -->
                                     <div class="col book_hotel_content">
-                                        <?php if ($this->session->userdata('user_session')) { ?>
-                                            <input type="submit" name="submit" value="Book Now" class="book_hotel" \>
-                                        <?php } else { ?>
-                                            <a class="book_hotel" href="<?php echo base_url() . 'login'; ?>">Book Now</a>
-                                        <?php } ?>
-
-
+                                       <input type="submit" name="submit" value="Book Now" class="book_hotel" \>
                                     </div>
 
                                 </div>
@@ -118,9 +112,9 @@
             </div> -->
 
             <div class="col-12 col-lg-12  col-xl-12 col-md-12">
-                <h2 class="Title_text text-center">Sitara Hotel</h2>
-                <p class="Subtitle_text">Sitara Hotel Apartment is the highest Deluxe rated luxury furnished hotel apartment, located in a centrally located bustling Bur Dubai area, in Oud Metha, 5-10 minutes by car from Deira business district, iconic Burj Khalifa and
-                    the Dubai Mall, Dubai International Financial Center, Sheikh Zayed Road, Dubai Health Care City and Dubai Airport, amongst many other destinations. Taxis and buses are only steps away. Dubai Metro is 20 minutes’ walk, or minutes
+                <h2 class="Title_text text-center">Sitara Hotel Apartment</h2>
+                <p class="Subtitle_text">Sitara Hotel Apartment is the highest Deluxe rated luxury furnished hotel apartment, <b>located</b>  in a centrally located bustling Bur Dubai area, in Oud Metha, 5-10 minutes by car from Deira business district, iconic Burj Khalifa and
+                    the Dubai Mall, Dubai International Exhibition & Conference Center (DWTC), Sheikh Zayed Road, Dubai Health Care City and Dubai Airport, amongst many other destinations. Taxis and buses are only steps away. Dubai Metro is 20 minutes’ walk, or minutes
                     by car
 
                 <p id="demo" class="collapse Subtitle_text">
@@ -130,18 +124,7 @@
                 </p>
 
                 <p style="text-align: left;padding: 0px;" class="img_content"><a data-toggle="collapse" data-target="#demo" href="javascript:void(0)" style="padding: 5px 9px !important;font-size: 11px !important;">Read More</a></p>
-
-
-
                 </p>
-
-
-
-
-
-
-
-
 
             </div>
         </div>
@@ -185,17 +168,17 @@
                                 </div>
                                 <div class="img_content">
                                     <p><?php echo $row->name; ?> </p>
-
-
-                                    <?php if ($this->session->userdata('user_session')) { ?>
-                                        <a href="<?php echo base_url() . 'product/' . $row->id; ?>">Book Now</a>
-                                    <?php } else { ?>
-                                        <a href="<?php echo base_url() . 'login'; ?>">Book Now</a>
-                                    <?php } ?>
-
-
+                                    <a href="<?php echo base_url() . 'roomDetails/' . $row->id; ?>">More Info</a>
+                                   
                                 </div>
                             </div>
+
+                            
+
+
+                           
+
+                           
 
 
                         <?php } ?>
@@ -226,10 +209,10 @@
                     <div class="overlay">
                         <div>
                             <h2>Rooms</h2>
-                            <p class="plus_sign"><i class="icofont-plus"></i></p>
-                            <div class="info">
+                            
+                            <h1 data-toggle="modal" data-target="#bx1" class="plus_sign"><i class="icofont-plus"></i></h1>
 
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -237,14 +220,11 @@
 
             <div class="col-lg-6 col-md-12  col-12 Lesspadding">
                 <div class="hovereffect">
-                    <img class="img-fluid" src="<?php echo base_url() . FRONT_CSS_JS; ?>images/Reception.jpg" alt="">
+                    <img class="img-fluid" src="<?php echo base_url() . FRONT_CSS_JS; ?>images/Reception.jpeg" alt="">
                     <div class="overlay">
                         <div>
                             <h2>Reception</h2>
-                            <p class="plus_sign"><i class="icofont-plus"></i></p>
-                            <div class="info">
-
-                            </div>
+                            <h1 data-toggle="modal" data-target="#bx2" class="plus_sign"><i class="icofont-plus"></i></h1>
                         </div>
                     </div>
                 </div>
@@ -265,14 +245,11 @@
 
             <div class="col-lg-4 col-md-12  col-12 Lesspadding">
                 <div class="hovereffect">
-                    <img class="img-fluid" src="<?php echo base_url() . FRONT_CSS_JS; ?>images/Cafe 2.jpg" alt="">
+                    <img class="img-fluid" src="<?php echo base_url() . FRONT_CSS_JS; ?>images/home/c1.jpg" alt="">
                     <div class="overlay">
                         <div>
-                            <h2>Cafe</h2>
-                            <p class="plus_sign"><i class="icofont-plus"></i></p>
-                            <div class="info">
-
-                            </div>
+                            <h2>Amber Restaurant</h2>
+                            <h1 data-toggle="modal" data-target="#bx3" class="plus_sign"><i class="icofont-plus"></i></h1>
                         </div>
                     </div>
                 </div>
@@ -285,10 +262,7 @@
                     <div class="overlay">
                         <div>
                             <h2>Gym</h2>
-                            <p class="plus_sign"><i class="icofont-plus"></i></p>
-                            <div class="info">
-
-                            </div>
+                            <h1 data-toggle="modal" data-target="#bx4" class="plus_sign"><i class="icofont-plus"></i></h1>
                         </div>
                     </div>
                 </div>
@@ -302,10 +276,7 @@
                     <div class="overlay">
                         <div>
                             <h2>Pool</h2>
-                            <p class="plus_sign"><i class="icofont-plus"></i></p>
-                            <div class="info">
-
-                            </div>
+                            <h1 data-toggle="modal" data-target="#bx5" class="plus_sign"><i class="icofont-plus"></i></h1>
                         </div>
                     </div>
                 </div>
@@ -443,3 +414,172 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!------------------First box---------------------------------->
+  <div class="modal fade roomdetails" id="bx1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close imgpopupcross" data-dismiss="modal"><i class="icofont-close"></i></button>
+          <div class="img_box_hm">
+            <div id="carouselstudio_newaa" class="arrow carousel carouselstudio  carousel-fade slide"
+              data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/st1.jpg');">
+                </div>
+                <div class="carousel-item" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/st2.jpg');">
+                </div>
+                <div class="carousel-item" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/st3.jpg');">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselstudio_newaa" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/prev.png"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselstudio_newaa" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/next.png"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------2 box---------------------------------->
+  <div class="modal fade roomdetails" id="bx2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close imgpopupcross" data-dismiss="modal"><i class="icofont-close"></i></button>
+          <div class="img_box_hm">
+            <div id="carouselstudio_newab" class="arrow carousel carouselstudio  carousel-fade slide"
+              data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/Reception.jpeg');">
+                </div>
+                <div class="carousel-item" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/Reception_1.jpeg');">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselstudio_newab" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/prev.png"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselstudio_newab" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/next.png"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------3 box---------------------------------->
+  <div class="modal fade roomdetails" id="bx3">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close imgpopupcross" data-dismiss="modal"><i class="icofont-close"></i></button>
+          <div class="img_box_hm">
+            <div id="carouselstudio_newac" class="arrow carousel carouselstudio  carousel-fade slide"
+              data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/c1.jpg');">
+                </div>
+                <div class="carousel-item" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/c2.jpg');">
+                </div>
+
+              </div>
+              <a class="carousel-control-prev" href="#carouselstudio_newac" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/prev.png"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselstudio_newac" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/next.png"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------4 box---------------------------------->
+  <div class="modal fade roomdetails" id="bx4">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close imgpopupcross" data-dismiss="modal"><i class="icofont-close"></i></button>
+          <div class="img_box_hm">
+            <div id="carouselstudio_newad" class="arrow carousel carouselstudio  carousel-fade slide"
+              data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/gy1.jpg');">
+                </div>
+                <div class="carousel-item" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/gy2.jpg');">
+                </div>
+
+              </div>
+              <a class="carousel-control-prev" href="#carouselstudio_newad" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/prev.png"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselstudio_newad" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/next.png"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------5 box---------------------------------->
+  <div class="modal fade roomdetails" id="bx5">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close imgpopupcross" data-dismiss="modal"><i class="icofont-close"></i></button>
+          <div class="img_box_hm">
+            <div id="carouselstudio_newae" class="arrow carousel carouselstudio  carousel-fade slide"
+              data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/p1.jpg');">
+                </div>
+                <div class="carousel-item" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/p2.jpg');">
+                </div>
+                <div class="carousel-item" style="background-image:url('<?php echo base_url() . FRONT_CSS_JS; ?>images/home/p3.jpg');">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselstudio_newae" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/prev.png"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselstudio_newae" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"><img src="<?php echo base_url() . FRONT_CSS_JS; ?>images/next.png"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

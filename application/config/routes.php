@@ -53,9 +53,11 @@ $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['emailtest'] = 'Home/emailtest';
 
+//$route['createMap'] = 'createMap';
 
-
+$route['cronjob'] = 'Cronjob';
 $route['home'] = 'Home';
 $route['about-us'] = 'Home/aboutUs';
 $route['gallery'] = 'Home/gallery';
@@ -67,13 +69,15 @@ $route['login'] = 'Home/login';
 $route['register'] = 'Home/register';
 $route['forgot-password'] = 'Home/forgotPassword';
 
-$route['dashboard'] = 'Home/dashboard';
+$route['dashboard/(:any)'] = 'Home/dashboard/$1';
 
 
 $route['buynow'] = 'Home/buyNow';
 
 $route['products'] = 'Home/products';
 $route['product/(:any)'] = 'Home/product/$1';
+$route['roomDetails/(:any)'] = 'Home/roomDetails/$1';
+$route['bookRoom/(:any)'] = 'Home/bookRoom/$1';
 
 
 $route['logout'] = 'Home/logout';
@@ -84,6 +88,7 @@ $route['varifyEmail/(:any)'] = 'Home/varifyEmail/$1';
 $route['resetPassword/(:any)'] = 'Home/resetPassword/$1';
 $route['resetPasswordSubmit'] = 'Home/resetPasswordSubmit';
 $route['getPaymentGatewayResponse'] = 'Home/getPaymentGatewayResponse';
+$route['cancelBooking/(:any)/(:any)'] = 'Home/cancelBooking/$1/$2';
 
 
 

@@ -47,12 +47,12 @@
                                  
                         <th class="col-xs-1">Name</th>   
                         <th class="col-xs-1">Room Status</th>                      
-                        <th class="col-xs-1">Amount</th>                     
+                        <!-- <th class="col-xs-1">Amount</th>                     
                         <th class="col-xs-1">After Discount Amount</th>      
-                        <th class="col-xs-1">Save Amount</th>                     
+                        <th class="col-xs-1">Save Amount</th>                      -->
                         <th class="col-xs-1">Save Percentage</th>
-                        <th class="col-xs-1">No Of Children</th>                     
-                        <th class="col-xs-1">No Of Adults</th>                     
+                        <!-- <th class="col-xs-1">No Of Children</th>                     
+                        <th class="col-xs-1">No Of Adults</th>                      -->
                         <th class="col-xs-2">Action</th>
                       </tr>
                     </thead>
@@ -65,12 +65,12 @@
                             <td><?php echo $row->room_type; ?></td>
                             <td><?php echo $row->name; ?></td>
                             <td><?php echo ($row->is_free) ? "Not Occupied" : "Occupied"; ?></td>
-                            <td><?php echo $row->amount; ?></td>
+                            <!-- <td><?php echo $row->amount; ?></td>
                             <td><?php echo $row->after_discount_amount; ?></td>
-                            <td><?php echo $row->save_amount; ?></td>
+                            <td><?php echo $row->save_amount; ?></td> -->
                             <td><?php echo $row->save_percentage; ?></td>
-                            <td><?php echo $row->no_of_children; ?></td>
-                            <td><?php echo $row->no_of_adults; ?></td>
+                            <!-- <td><?php //echo $row->no_of_children; ?></td>
+                            <td><?php //echo $row->no_of_adults; ?></td> -->
                             <td>
                             
                               <a title="Delete Photo" onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url() . 'Admin/deleteRoom/' . $row->id; ?>" >

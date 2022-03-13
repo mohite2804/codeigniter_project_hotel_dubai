@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends CI_Controller {
 
 	public function __construct(){
+		error_reporting(0);
 		Parent::__construct();
 		//echo "<pre> "; print_r($_SESSION); exit;
 		$this->load->model('Main_Model');
@@ -15,21 +16,208 @@ class Admin extends CI_Controller {
 	}
 	
 //-------------------------------------- admin management start -------------------------------------------------	
+
+
+
+
 	public function checkLogin(){
 		if(!$this->database_library->checkLogin())
 			redirect(base_url().'admin');
 	}
+
+	public function roomRateSetting(){
+		
+		if(!empty($this->input->post('submit'))){
+			$this->load->library('excel');
+			$newimagename = "";
+			if(!empty($_FILES['room_rate_setting']['name'])){
+					$image_file = "room_rate_setting";
+					$directory = "./uploads/roomRateSetting/";
+
+					
+					
+					$filename = $_FILES[$image_file]["name"];
+					$_FILES[$image_file]["name"] = time().$filename;
+
+					
+
+					$config = array(
+						'upload_path' => $directory, 
+						'allowed_types' => 'xls',
+					);
+					
+					$this ->load->library("upload", $config);
+
+					
+
+					if ($this->upload->do_upload($image_file)) {
+						
+						$image_data = $this->upload->data();
+						$newimagename = $image_data["file_name"];						
+					}
+
+					$inputFileName  =  $directory. $newimagename;
+					
+
+					try {
+						$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+						
+						
+						$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+						$objPHPExcel = $objReader->load($inputFileName);
+						$allDataInSheet = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
+
+					
+						$flag = true;
+						$i=0;
+						$inserdata = array();
+						foreach ($allDataInSheet as $value) {
+						  if($flag){
+							$flag =false;
+							continue;
+						  }
+						  $room_type_short_name = trim($value['A']);
+						  $room_type_id = $this->Main_Model->getRoomTypeIdByshortCode($room_type_short_name);
+						 
+						  if($room_type_id){
+							$room_type_id = $room_type_id->id; 
+						 						  
+							$inserdata[$i]['room_type_id'] = $room_type_id;
+							$inserdata[$i]['year'] = $value['B'];
+							$inserdata[$i]['month'] = $value['C'];
+							$inserdata[$i]['day_1'] = $value['D'];
+							$inserdata[$i]['day_2'] = $value['E'];
+							$inserdata[$i]['day_3'] = $value['F'];
+							$inserdata[$i]['day_4'] = $value['G'];
+							$inserdata[$i]['day_5'] = $value['H'];
+
+							$inserdata[$i]['day_6'] = $value['I'];
+							$inserdata[$i]['day_7'] = $value['J'];
+							$inserdata[$i]['day_8'] = $value['K'];
+							$inserdata[$i]['day_9'] = $value['L'];
+							$inserdata[$i]['day_10'] = $value['M'];
+							$inserdata[$i]['day_11'] = $value['N'];
+							$inserdata[$i]['day_12'] = $value['O'];
+							$inserdata[$i]['day_13'] = $value['P'];
+							$inserdata[$i]['day_14'] = $value['Q'];
+
+							$inserdata[$i]['day_15'] = $value['R'];
+							$inserdata[$i]['day_16'] = $value['S'];
+							$inserdata[$i]['day_17'] = $value['T'];
+							$inserdata[$i]['day_18'] = $value['U'];
+							$inserdata[$i]['day_19'] = $value['V'];
+							$inserdata[$i]['day_20'] = $value['W'];
+							$inserdata[$i]['day_21'] = $value['X'];
+							$inserdata[$i]['day_22'] = $value['Y'];
+
+							$inserdata[$i]['day_23'] = $value['Z'];
+							$inserdata[$i]['day_24'] = $value['AA'];
+							$inserdata[$i]['day_25'] = $value['AB'];
+							$inserdata[$i]['day_26'] = $value['AC'];
+							$inserdata[$i]['day_27'] = $value['AD'];
+							$inserdata[$i]['day_28'] = $value['AE'];
+							$inserdata[$i]['day_29'] = $value['AF'];
+							$inserdata[$i]['day_30'] = $value['AG'];
+							$inserdata[$i]['day_31'] = $value['AH'];
+
+						  	$i++;
+						  }
+						}          
+						
+						
+						$affected = "";
+						if(!empty($inserdata)){
+							
+							$affected = $this->Main_Model->insertDatatIntoRoomRates($inserdata);   
+						}
+						
+						
+
+						if($affected){		
+							$this->Main_Model->cronRunOrNot();
+							$this->Main_Model->updateRoomBooking();
+							$this->Main_Model->updateRoomRateDaily();					
+							$this->session->set_flashdata('suc_msg_excel', "<span style='color:green' >Excel Upload Successfully.</span>");
+						}else{
+							$this->session->set_flashdata('suc_msg_excel', "<span style='color:red' >Please try again after some time.</span>");
+						}
+						redirect(base_url().'admin/roomRateSetting');
+
+						          
+		 
+				  } catch (Exception $e) {
+					   die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME)
+								. '": ' .$e->getMessage());
+					}
+					
+			}
+			
+		}
+
+		$data['result'] = $this->Main_Model->roomRateSetting();
+		//echo $this->db->last_query(); exit;
+		$data['main_contain'] = 'admin/roomRateSetting/index';
+		$this->load->view('admin/includes/template',$data);
+	}
+
+	public function extraSetting(){
+
+
+		if(!empty($this->input->post('submit'))){
+
+		
+			$this->db->set('extra_bed_amount', $this->input->post('extra_bed_amount'));
+			$this->db->set('extra_adult_amount', $this->input->post('extra_adult_amount'));
+			$this->db->set('extra_adult_breakfast_amount', $this->input->post('extra_adult_breakfast_amount'));
+			$this->db->set('extra_child_breakfast_amount', $this->input->post('extra_child_breakfast_amount'));
+			$this->db->where('id', $this->input->post('id'));
+			$this->db->update('extra_setting'); 
+
+			
+
+			$success_messge = "Update successfully";	
+		
+			$this->session->set_flashdata('suc_msg_extra_setting_update', "<span style='color:green' >".$success_messge."</span>");
+			redirect(base_url().'admin/extraSetting');
+
+		}
+		$data['result'] = $this->Main_Model->extraSetting();
+		
+		$data['main_contain'] = 'admin/extraSetting/index';
+		$this->load->view('admin/includes/template',$data);
+	}
+
 	public function logout(){
 		$this->session->unset_userdata('admin_session');
 		redirect(base_url().'admin');
 	}
 
-	public function getOrders(){
-		$where = " o.id != 0 ";
+	function cancelApprove($order_id){
 		
+		$affected = $this->Main_Model->cancelApprove($order_id);
 
+		if($affected){
+			$this->session->set_flashdata('suc_msg_order_index', "<span style='color:green' >Room Canceled Succefully.</span>");
+		}else{
+			$this->session->set_flashdata('suc_msg_order_index', "<span style='color:red' >Please try again after some time.</span>");
+		}
+		redirect(base_url().'admin/getOrders');
+	}
 
-	
+	function CheckoutRoom($order_id){
+		$affected = $this->Main_Model->CheckoutRoom($order_id);
+
+		if($affected){
+			$this->session->set_flashdata('suc_msg_order_index', "<span style='color:green' >Room Checkout Succefully.</span>");
+		}else{
+			$this->session->set_flashdata('suc_msg_order_index', "<span style='color:red' >Please try again after some time.</span>");
+		}
+		redirect(base_url().'admin/getOrders');
+	}
+
+	function getOrders(){
+		$where = " o.id != 0 ";
+			
 		if(!empty($this->input->post('submit'))){
 
 			//echo "<pre>"; print_r($this->input->post()); exit;
@@ -54,7 +242,7 @@ class Admin extends CI_Controller {
 		}
 
 		$data['result'] = $this->Main_Model->getOrders();
-	//	echo "<pre>"; print_r($data); exit;
+		//echo "<pre>"; print_r($data); exit;
 		
 		$data['main_contain'] = 'admin/orders/index';
 		$this->load->view('admin/includes/template',$data);
@@ -89,9 +277,10 @@ class Admin extends CI_Controller {
 		
 		
 			if (!$this->form_validation->run() == FALSE){
-				$name = $this->input->post('name');			
+				$name = $this->input->post('name');	
+				$short_name = $this->input->post('short_name');			
 				
-				$sql = "INSERT INTO `room_types` (name) VALUES('$name')" ;
+				$sql = "INSERT INTO `room_types` (short_name,name) VALUES('$short_name','$name')" ;
 				$room_type_id = $this->Main_Model->addUserAlbum($sql);
 				$this->session->set_flashdata('suc_msg_room_type_add', "<span style='color:green' >Room Type add successfully</span>");
 				$this->session->set_flashdata('suc_msg_room_type_index', "<span style='color:green' >Room Type add successfully</span>");
@@ -183,7 +372,7 @@ class Admin extends CI_Controller {
 
 			
 
-				$amount = $this->input->post('amount');
+				//$amount = $this->input->post('amount');
 				$save_percentage = $this->input->post('save_percentage');
 				
 				$room_highlight = $this->input->post('room_highlight');
@@ -201,12 +390,12 @@ class Admin extends CI_Controller {
 				}
 
 				
-				$after_discount_amount = $amount;
-				$save_amount = "0";
-				if($save_percentage){
-					$save_amount =  ($save_percentage / 100) * (float)$amount;
-					$after_discount_amount = (float)$amount - (float)$save_amount;
-				}
+				// $after_discount_amount = $amount;
+				// $save_amount = "0";
+				// if($save_percentage){
+				// 	$save_amount =  ($save_percentage / 100) * (float)$amount;
+				// 	$after_discount_amount = (float)$amount - (float)$save_amount;
+				// }
 				
 				$user_id = 1;
 				$created_at = date('Y-m-d H:i:s');
@@ -216,9 +405,9 @@ class Admin extends CI_Controller {
 					'description' => $description,
 					'no_of_children' => $no_of_children,
 					'no_of_adults' => $no_of_adults,
-					'amount' => $amount,
-					'after_discount_amount' => $after_discount_amount,
-					'save_amount' => $save_amount,
+					// 'amount' => $amount,
+					// 'after_discount_amount' => $after_discount_amount,
+					// 'save_amount' => $save_amount,
 					'save_percentage' => $save_percentage,	
 					'room_highlight' => $room_highlight,	
 					'room_amenities' => $room_amenities,	
@@ -289,6 +478,7 @@ class Admin extends CI_Controller {
 			$room_type_id = $this->input->post('room_type_id');
 			if($this->input->post('name')){
 				$this->db->set('name', $this->input->post('name'));
+				$this->db->set('short_name', $this->input->post('short_name'));
 				$this->db->where('id',  $room_type_id);
 				$this->db->update('room_types'); 
 
@@ -318,7 +508,7 @@ class Admin extends CI_Controller {
 			$no_of_children = 1;
 			$no_of_adults = 1;
 
-			$amount = $this->input->post('amount');
+			//$amount = $this->input->post('amount');
 			$save_percentage = $this->input->post('save_percentage');
 
 
@@ -337,12 +527,12 @@ class Admin extends CI_Controller {
 				$room_amenities = "";
 			}
 			
-			$after_discount_amount = "0";
-			$save_amount = "0";
-			if($save_percentage){
-				$save_amount =  ($save_percentage / 100) * (float)$amount;
-				$after_discount_amount = (float)$amount - (float)$save_amount;
-			}
+			// $after_discount_amount = "0";
+			// $save_amount = "0";
+			// if($save_percentage){
+			// 	$save_amount =  ($save_percentage / 100) * (float)$amount;
+			// 	$after_discount_amount = (float)$amount - (float)$save_amount;
+			// }
 			
 			$user_id = 1;
 			$created_at = date('Y-m-d H:i:s');
@@ -354,12 +544,12 @@ class Admin extends CI_Controller {
 			$this->db->set('description', $description);
 			$this->db->set('no_of_children', $no_of_children);
 			$this->db->set('no_of_adults', $no_of_adults);
-			$this->db->set('amount', $amount);
+			//$this->db->set('amount', $amount);
 			$this->db->set('save_percentage', $save_percentage);
 			$this->db->set('updated_by', $user_id);
 			$this->db->set('updated_at', $created_at);
-			$this->db->set('after_discount_amount', $after_discount_amount);
-			$this->db->set('save_amount', $save_amount);
+			//$this->db->set('after_discount_amount', $after_discount_amount);
+			//$this->db->set('save_amount', $save_amount);
 			
 			$this->db->set('room_highlight', $room_highlight);
 			$this->db->set('room_amenities', $room_amenities);

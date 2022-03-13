@@ -43,6 +43,7 @@
                     <thead>
                       <tr>
                         <th class="col-xs-1">No.</th>
+                        <th class="col-xs-1">Short Name</th> 
                         <th class="col-xs-1">Name</th>                     
 
                         <th class="col-xs-2">Action</th>
@@ -54,6 +55,7 @@
                         foreach ($result as $row) { ?>
                           <tr>
                             <td><?php echo $i; ?></td>
+                            <td><?php echo $row->short_name; ?></td>
                             <td><?php echo $row->name; ?></td>
                             <td>
                             

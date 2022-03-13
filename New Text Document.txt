@@ -30,10 +30,8 @@ https://github.com/codeforcrack-kalai/CCAvenue-Payment-Gateway-integration-for-C
 https://www.tutorialswebsite.com/google-translate-api-with-php-javascript/
 
 
+https://www.webslesson.info/2018/04/how-to-import-excel-data-into-mysql-database-using-codeigniter.html
 
-Product Page 3 days
-Dashboard Page 3 days
-Payment Gateway 5 day
-SMS Gateway 3 day 
-Admin Room Report 4 day
+https://techarise.com/import-excel-file-mysql-codeigniter/
 
+https://webprepration.com/import-excel-file-mysql-using-codeigniter/

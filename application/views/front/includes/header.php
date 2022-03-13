@@ -6,11 +6,11 @@
 
 
         <p class="lang_bar text-left">
-          <a href="javascript:void(0);" class="eng_lang" translate="no" onclick="changeLanguageByButtonClick_en()">
+          <!-- <a href="javascript:void(0);" class="eng_lang" translate="no" onclick="changeLanguageByButtonClick_en()">
             <input value="en" id="language_en" /> English</a>
           <span>|</span>
           <a href="javascript:void(0);" class="areb_lang" translate="no" onclick="changeLanguageByButtonClick()">
-            <input value="ar" id="language" /> Arabic</a>
+            <input value="ar" id="language" /> Arabic</a> -->
         </p>
 
      
@@ -20,18 +20,18 @@
 
       </div>
       <?php if (!$this->session->userdata('user_session')) { ?>
-        <div class="col-6 col-lg-6  col-xl-6 col-md-12 ">
+        <!-- <div class="col-6 col-lg-6  col-xl-6 col-md-12 ">
           <p class="login_bar text-right">
             <a href="<?php echo base_url() . 'login'; ?>">Login</a>
             <span>|</span>
             <a href="<?php echo base_url() . 'register'; ?>">Register</a>
 
           </p>
-        </div>
+        </div> -->
       <?php } ?>
 
       <?php if ($this->session->userdata('user_session')) { ?>
-      <div class="col-6 col-lg-6  col-xl-6 col-md-12 ">
+      <!-- <div class="col-6 col-lg-6  col-xl-6 col-md-12 ">
 
         <div class="dropdown logout_drp">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,7 +53,7 @@
 
           </div>
         </div>
-      </div>
+      </div> -->
 
       <?php } ?>
 
@@ -79,20 +79,7 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="mr-auto"> </div>
-        <ul class="navbar-nav">
-
-          <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link"> &nbsp;Sitara Hotel Apartment</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a href="" class="nav-link"><i class="icofont-ui-call"></i> &nbsp;+91 8989876789</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link last-nav-link"><i class="icofont-ui-cell-phone"></i> &nbsp;+91 78767878987</a>
-          </li> -->
-
-
-        </ul>
+        <P class="sitaraname">Sitara Hotel Apartment</P>
       </div>
     </nav>
   </div>

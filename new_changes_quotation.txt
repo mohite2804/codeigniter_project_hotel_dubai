@@ -1,0 +1,95 @@
+-------------Admin Panel------------
+
+-- Set Breakfast Rate for Adult from admin panel
+-- Set Breakfast rate for children 6-10 age from admin panel
+-- Set breakfast free for below age from admin panel
+-- Set Per Adult rate from admin panel (per night)
+
+-- Maximum Occupancy is 3 adult in a room with extra bed
+	Q : 3 adult and any children or not
+
+-- 2 kids below 10 year go free
+	Q : if more than 3 then what ex: 5 kids below 10 then what
+
+-- per day rate chage calulation 
+	Q : if rate not available then what is next
+
+Effect on front end
+	-- Rate calculation totaly changes.
+
+Arabic language change problem 
+	Q : send wrong word 
+
+---------------Front ----------------------
+Home Page changes
+	home page filter change
+	design change
+
+Product Page Changes 
+	design change
+	product page filter changes
+	show other room
+
+	Breakfast for adult (changes in amount)
+	Breakfast for children 6 - 10 year (changes in amount)
+	Breakfast for child below 6 (changes in amount)
+
+
+	add code for children age
+	children wise calculation 
+	adult wise calculation
+	childern below 10 year for 2 free
+	
+	
+The Aadhaar letter PDF Password will be in 8 characters
+Combination of the first four letter of your name (as in Aadhaar) in CAPITAL letters and Year of Birth in YYYY format.
+
+Example : Your name is ANISH Y KUMAR Your Year of Birth is 1989
+Then your e-Aadhaar password is ANIS 1989
+
+RUDR2016
+PRIY1992
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Room Occupancy
+
+Single or Double occupancy on room basis only is same rate.
+
+Additional adult rate increased by 150 net per night
+
+02 Kids below 10 years go free.
+
+Extra beds charged at 150/- net per night
+
+ 
+
+Breakfast Charges
+
+Breakfast per adult 50/- net
+
+Child breakfast 6-10 years 25/- net
+
+Child below 6 dine free 
+
+ Maximum Occupancy is 03 adults in a room with an extra bed.
+
+
+
+Abbreviation for room types: 
+
+ 
+
+STK – Studio Deluxe King
+
+STT – Studio Deluxe Twin
+
+OBK – One Bedroom Deluxe
+
+OBE – One Bedroom Emperor
+
+
+
